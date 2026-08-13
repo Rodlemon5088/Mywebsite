@@ -1,0 +1,2523 @@
+index.html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Construction Authority LLC — Immediate 30-Second HVAC Quote</title>
+    <meta name="description" content="Get an immediate 30-second HVAC quote from The Construction Authority LLC. Louisiana state-licensed HVAC, electrical, and master gas fitter services." />
+    <meta name="author" content="The Construction Authority LLC" />
+    <meta property="og:title" content="The Construction Authority LLC — Immediate 30-Second HVAC Quote" />
+    <meta property="og:description" content="Professional HVAC replacement and emergency services with instant pricing and 30-second quotes." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.buildwithauthority.expert/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The Construction Authority LLC — Immediate 30-Second HVAC Quote" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+src/main.tsx
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
+
+createRoot(document.getElementById("root")!).render(<App />);
+src/App.tsx
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Index from "./pages/Index";
+import Login from "./pages/Login";
+import AdminDashboard from "./pages/AdminDashboard";
+import TechView from "./pages/TechView";
+import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/tech" element={<TechView />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+export default App;
+src/index.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 96.3% 0.009 83.5;
+    --foreground: 23.4% 0.018 247.5;
+    --card: 100% 0 0;
+    --card-foreground: 23.4% 0.018 247.5;
+    --popover: 100% 0 0;
+    --popover-foreground: 23.4% 0.018 247.5;
+    --primary: 63.8% 0.136 53.8;
+    --primary-foreground: 15% 0.01 245;
+    --secondary: 47.6% 0.086 234.5;
+    --secondary-foreground: 100% 0 0;
+    --muted: 96.5% 0.011 84.5;
+    --muted-foreground: 53.5% 0.024 247.5;
+    --accent: 96.5% 0.011 84.5;
+    --accent-foreground: 23.4% 0.018 247.5;
+    --destructive: 62% 0.15 25;
+    --destructive-foreground: 100% 0 0;
+    --border: 89.2% 0.016 84.5;
+    --input: 83.5% 0.021 84.5;
+    --ring: 63.8% 0.136 53.8;
+    --radius: 0.25rem;
+    --sidebar-background: 96.3% 0.009 83.5;
+    --sidebar-foreground: 23.4% 0.018 247.5;
+    --sidebar-primary: 63.8% 0.136 53.8;
+    --sidebar-primary-foreground: 15% 0.01 245;
+    --sidebar-accent: 96.5% 0.011 84.5;
+    --sidebar-accent-foreground: 23.4% 0.018 247.5;
+    --sidebar-border: 89.2% 0.016 84.5;
+    --sidebar-ring: 63.8% 0.136 53.8;
+  }
+  .dark {
+    --background: 23.5% 0.018 245;
+    --foreground: 96.5% 0.012 85;
+    --card: 15% 0.01 245;
+    --card-foreground: 96.5% 0.012 85;
+    --popover: 15% 0.01 245;
+    --popover-foreground: 96.5% 0.012 85;
+    --primary: 63.5% 0.135 55;
+    --primary-foreground: 15% 0.01 245;
+    --secondary: 47.5% 0.085 235;
+    --secondary-foreground: 100% 0 0;
+    --muted: 35% 0.02 245;
+    --muted-foreground: 75% 0.015 245;
+    --accent: 35% 0.02 245;
+    --accent-foreground: 96.5% 0.012 85;
+    --destructive: 62% 0.15 25;
+    --destructive-foreground: 100% 0 0;
+    --border: 35% 0.02 245;
+    --input: 35% 0.02 245;
+    --ring: 63.5% 0.135 55;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground font-sans; }
+  h1, h2, h3, h4, h5, h6, .font-heading { font-family: 'Space Grotesk', sans-serif; }
+}
+src/lib/utils.ts
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+tailwind.config.ts
+import type { Config } from "tailwindcss";
+
+export default {
+  darkMode: ["class"],
+  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  prefix: "",
+  theme: {
+    container: { center: true, padding: "2rem", screens: { "2xl": "1400px" } },
+    extend: {
+      fontFamily: { sans: ["DM Sans", "sans-serif"], heading: ["Space Grotesk", "sans-serif"] },
+      colors: {
+        border: "oklch(var(--border))", input: "oklch(var(--input))", ring: "oklch(var(--ring))",
+        background: "oklch(var(--background))", foreground: "oklch(var(--foreground))",
+        primary: { DEFAULT: "oklch(var(--primary))", foreground: "oklch(var(--primary-foreground))" },
+        secondary: { DEFAULT: "oklch(var(--secondary))", foreground: "oklch(var(--secondary-foreground))" },
+        destructive: { DEFAULT: "oklch(var(--destructive))", foreground: "oklch(var(--destructive-foreground))" },
+        muted: { DEFAULT: "oklch(var(--muted))", foreground: "oklch(var(--muted-foreground))" },
+        accent: { DEFAULT: "oklch(var(--accent))", foreground: "oklch(var(--accent-foreground))" },
+        popover: { DEFAULT: "oklch(var(--popover))", foreground: "oklch(var(--popover-foreground))" },
+        card: { DEFAULT: "oklch(var(--card))", foreground: "oklch(var(--card-foreground))" },
+        sidebar: {
+          DEFAULT: "oklch(var(--sidebar-background))", foreground: "oklch(var(--sidebar-foreground))",
+          primary: "oklch(var(--sidebar-primary))", "primary-foreground": "oklch(var(--sidebar-primary-foreground))",
+          accent: "oklch(var(--sidebar-accent))", "accent-foreground": "oklch(var(--sidebar-accent-foreground))",
+          border: "oklch(var(--sidebar-border))", ring: "oklch(var(--sidebar-ring))",
+        },
+      },
+      borderRadius: { lg: "var(--radius)", md: "calc(var(--radius) - 2px)", sm: "calc(var(--radius) - 4px)" },
+      keyframes: {
+        "accordion-down": { from: { height: "0" }, to: { height: "var(--radix-accordion-content-height)" } },
+        "accordion-up": { from: { height: "var(--radix-accordion-content-height)" }, to: { height: "0" } },
+        "queen-flip": {
+          "0%": { transform: "perspective(1700px) rotateY(-90deg) scale(.94)", opacity: "0" },
+          "45%": { opacity: "1" },
+          "100%": { transform: "perspective(1700px) rotateY(0deg) scale(1)", opacity: "1" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "queen-flip": "queen-flip 1150ms cubic-bezier(.62,.04,.34,1) both",
+      },
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config;
+vite.config.ts
+import { defineConfig } from "vitejs.dev/config";
+import react from "@vitejs/plugin-react-swc";
+import path from "path";
+import { componentTagger } from "@leadconnector/vibe-tagger";
+
+export default defineConfig(({ mode }) => ({
+  server: { host: "::", port: 8080, allowedHosts: [".modal.host"], hmr: { overlay: false } },
+  plugins: [react(), mode === "development" && componentTagger({ tailwindConfig: true })].filter(Boolean),
+  resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
+}));
+src/components/ui/button.tsx (customized with 3D effect)
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const buttonVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_4px_0_0_rgba(0,0,0,0.2)] hover:shadow-[0_2px_0_0_rgba(0,0,0,0.2)] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px]",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-[0_4px_0_0_rgba(0,0,0,0.2)] hover:shadow-[0_2px_0_0_rgba(0,0,0,0.2)] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px]",
+        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-[0_4px_0_0_rgba(0,0,0,0.05)] hover:shadow-[0_2px_0_0_rgba(0,0,0,0.05)] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px]",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-[0_4px_0_0_rgba(0,0,0,0.1)] hover:shadow-[0_2px_0_0_rgba(0,0,0,0.1)] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px]",
+        ghost: "hover:bg-accent hover:text-accent-foreground active:scale-95",
+        link: "text-primary underline-offset-4 hover:underline active:scale-95",
+      },
+      size: { default: "h-10 px-4 py-2", sm: "h-9 rounded-md px-3", lg: "h-11 rounded-md px-8", icon: "h-10 w-10" },
+    },
+    defaultVariants: { variant: "default", size: "default" },
+  },
+);
+
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+  },
+);
+Button.displayName = "Button";
+
+export { Button, buttonVariants };
+src/pages/Index.tsx
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Calendar, CheckCircle2, Phone, AlertTriangle } from "lucide-react";
+import { useState } from "react";
+import { QuoteWidget } from "@/components/QuoteWidget";
+import { EmergencyWidget } from "@/components/EmergencyWidget";
+import { CallbackWidget } from "@/components/CallbackWidget";
+import { Hero3D } from "@/components/Hero3D";
+import { Link } from "react-router-dom";
+
+const Index = () => {
+  const [isEmergencyOpen, setIsEmergencyOpen] = useState(false);
+  const [isCallbackOpen, setIsCallbackOpen] = useState(false);
+  const [quoteScope, setQuoteScope] = useState<"complete" | "condenser">("complete");
+
+  return (
+    <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden">
+      {/* Navbar */}
+      <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-5 bg-background/80 backdrop-blur-md border-b border-border">
+        <div className="flex items-center gap-3">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
+            <rect width="32" height="32" rx="4" fill="#1C242C"/>
+            <path d="M16 6L6 14V26H12V18H20V26H26V14L16 6Z" fill="#C57B3D"/>
+          </svg>
+          <div className="font-heading text-lg sm:text-xl font-bold tracking-wider uppercase hidden md:block">
+            The Construction <span className="text-[#C57B3D]">Authority</span> LLC
+          </div>
+        </div>
+        <div className="flex items-center gap-2 sm:gap-4">
+          <Button 
+            variant="destructive" 
+            className="flex font-bold px-3 sm:px-6 bg-[#E06C5A] hover:bg-[#c95d4d] text-white uppercase tracking-wider h-9 sm:h-10 shadow-[0_4px_0_0_#9c3e2e] hover:shadow-[0_2px_0_0_#9c3e2e] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] transition-all border border-[#E06C5A]/50 animate-pulse text-xs sm:text-sm"
+            onClick={() => setIsEmergencyOpen(true)}
+          >
+            <AlertTriangle className="mr-1 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" /> <span className="hidden sm:inline">EMERGENCY HVAC CALL</span><span className="sm:hidden">EMERGENCY</span>
+          </Button>
+          <Button variant="default" className="font-semibold px-3 sm:px-6 h-9 sm:h-10 text-xs sm:text-sm uppercase tracking-wider" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
+            Immediate 30-Sec Quote
+          </Button>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <header className="relative min-h-[92vh] flex items-center overflow-hidden border-b border-border pt-24 lg:pt-0">
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-background via-background/90 to-transparent pointer-events-none" />
+        <div className="container relative z-10 mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-2xl pt-4 lg:pt-8 pb-12">
+            <div className="mb-6">
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-widest uppercase mb-4">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                Immediate 30-Second Quote
+              </div>
+              <h1 className="font-heading text-lg sm:text-xl lg:text-2xl tracking-[0.15em] text-primary font-bold uppercase animate-pulse mb-4">
+                Tap to select your need
+              </h1>
+            </div>
+            <div className="flex flex-col gap-4">
+              <Button 
+                onClick={() => setIsEmergencyOpen(true)}
+                className="w-full sm:w-auto bg-[#E06C5A] hover:bg-[#c95d4d] text-white font-bold h-auto py-4 px-8 text-center flex items-center justify-center rounded-lg shadow-[0_6px_0_0_#9c3e2e] hover:shadow-[0_3px_0_0_#9c3e2e] hover:translate-y-[3px] active:shadow-none active:translate-y-[6px] transition-all border border-[#E06C5A]/50"
+              >
+                <div className="flex items-center gap-2 text-xl uppercase tracking-wider">
+                  <AlertTriangle size={24} /> Emergency HVAC Service
+                </div>
+              </Button>
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-2">
+                <Button size="lg" className="w-full sm:flex-1 font-semibold text-lg px-8 h-14 bg-[#461D7C] hover:bg-[#3b1869] text-[#FDD023] border border-[#461D7C]/50 shadow-[0_6px_0_0_#2a114a] hover:shadow-[0_3px_0_0_#2a114a] hover:translate-y-[3px] active:shadow-none active:translate-y-[6px] transition-all" onClick={() => { setQuoteScope("complete"); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}>
+                  Replace HVAC System
+                </Button>
+                <Button size="lg" className="w-full sm:flex-1 font-semibold text-lg px-8 h-14 bg-[#23718A] hover:bg-[#1a5569] text-white border border-[#23718A]/50 shadow-[0_6px_0_0_#123d4a] hover:shadow-[0_3px_0_0_#123d4a] hover:translate-y-[3px] active:shadow-none active:translate-y-[6px] transition-all" onClick={() => { setQuoteScope("condenser"); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}>
+                  Replace Condenser
+                </Button>
+              </div>
+              <Button 
+                variant="outline" size="lg" 
+                className="w-full mt-2 font-semibold text-lg h-14 bg-[#6699CC] hover:bg-[#5588BB] text-[#FFCC00] border border-[#6699CC]/50 shadow-[0_6px_0_0_#3d6b99] hover:shadow-[0_3px_0_0_#3d6b99] hover:translate-y-[3px] active:shadow-none active:translate-y-[6px] transition-all" 
+                onClick={() => setIsCallbackOpen(true)}
+              >
+                <Phone className="mr-2 h-5 w-5" /> Not Sure? Request a Callback
+              </Button>
+            </div>
+          </div>
+          <div className="relative h-full min-h-[400px] lg:min-h-[600px] flex items-center justify-center">
+            <Hero3D />
+            <div className="absolute right-6 bottom-6 text-xs text-muted-foreground tracking-widest uppercase z-10 pointer-events-none">
+              Drag to inspect the unit
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Badges Section */}
+      <section className="border-b border-border bg-card py-6 px-4 sm:px-6">
+        <div className="container mx-auto flex flex-wrap justify-center gap-x-6 sm:gap-x-12 gap-y-4">
+          {["Residential Construction", "Electrical", "HVAC", "Master Natural Gas Fitter"].map((item) => (
+            <span key={item} className="text-xs sm:text-sm tracking-[0.1em] sm:tracking-[0.15em] text-muted-foreground font-medium uppercase flex items-center gap-2">
+              <span className="text-primary">▪</span> {item}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact / Quote Widget Section */}
+      <section id="contact" className="py-24 px-6 relative">
+        <div className="container mx-auto max-w-4xl">
+          <div className="mb-16 flex justify-center">
+            <Button onClick={() => setIsEmergencyOpen(true)} className="w-full sm:w-auto bg-[#E06C5A] hover:bg-[#c95d4d] text-white font-bold h-auto py-4 px-8 text-center flex items-center justify-center rounded-lg shadow-[0_6px_0_0_#9c3e2e] hover:shadow-[0_3px_0_0_#9c3e2e] hover:translate-y-[3px] active:shadow-none active:translate-y-[6px] transition-all border border-[#E06C5A]/50">
+              <div className="flex items-center gap-2 text-xl uppercase tracking-wider">
+                <AlertTriangle size={24} /> EMERGENCY HVAC CALL
+              </div>
+            </Button>
+          </div>
+          <div className="text-center mb-12">
+            <p className="text-sm tracking-[0.2em] text-primary font-semibold mb-2 uppercase">Immediate 30-Second Quote</p>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold uppercase mb-6">Get Started</h2>
+            <div className="flex justify-center">
+              <Button variant="outline" size="lg" className="font-semibold text-lg h-14 bg-[#6699CC] hover:bg-[#5588BB] text-[#FFCC00] border border-[#6699CC]/50 shadow-[0_6px_0_0_#3d6b99] hover:shadow-[0_3px_0_0_#3d6b99] hover:translate-y-[3px] active:shadow-none active:translate-y-[6px] transition-all px-8" onClick={() => setIsCallbackOpen(true)}>
+                <Phone className="mr-2 h-5 w-5" /> Not Sure? Request a Callback
+              </Button>
+            </div>
+          </div>
+          <div className="mt-8">
+            <QuoteWidget onOpenCallback={() => setIsCallbackOpen(true)} initialScope={quoteScope} onScopeChange={setQuoteScope} />
+          </div>
+        </div>
+      </section>
+
+      {/* Simple Contact Form for TCR Compliance */}
+      <section className="py-24 px-6 bg-card border-t border-border">
+        <div className="container mx-auto max-w-2xl">
+          <div className="text-center mb-10">
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold uppercase mb-4">Contact Us</h2>
+            <p className="text-muted-foreground">Have a general question? Send us a message below.</p>
+          </div>
+          <form className="space-y-6 bg-background p-8 rounded-xl border border-border shadow-sm" onSubmit={(e) => { e.preventDefault(); alert("Thank you! If you opted in to SMS, you'll receive a confirmation text shortly. Reply STOP at any time to unsubscribe."); }}>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label htmlFor="firstName" className="text-sm font-semibold uppercase tracking-wider">First Name</label>
+                <input id="firstName" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="John" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="lastName" className="text-sm font-semibold uppercase tracking-wider">Last Name</label>
+                <input id="lastName" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="Doe" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-sm font-semibold uppercase tracking-wider">Email Address</label>
+              <input id="email" type="email" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="john@example.com" />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="phone" className="text-sm font-semibold uppercase tracking-wider">Phone Number</label>
+              <input id="phone" type="tel" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="(504) 555-0123" />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="message" className="text-sm font-semibold uppercase tracking-wider">Message</label>
+              <textarea id="message" required className="flex min-h-[100px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="How can we help you?" />
+            </div>
+            <div className="flex items-start gap-3 p-4 bg-muted/50 rounded-lg border border-border">
+              <input type="checkbox" id="sms-consent" className="mt-1 h-4 w-4 shrink-0 rounded-sm border-primary text-primary focus:ring-primary" />
+              <label htmlFor="sms-consent" className="text-xs text-muted-foreground leading-relaxed">
+                I agree to receive recurring SMS marketing messages from The Construction Authority LLC at the phone number provided. Message frequency varies. Msg & data rates may apply. Consent is not a condition of purchase. Reply STOP to opt out, HELP for assistance. View our <Link to="/privacy-policy" className="underline hover:text-primary">Privacy Policy</Link>.
+              </label>
+            </div>
+            <Button type="submit" className="w-full font-bold uppercase tracking-wider h-12">Send Message</Button>
+          </form>
+          <p className="text-xs text-muted-foreground text-center mt-4">
+            You can also text START to (504) 332-9801 to opt in to updates from The Construction Authority LLC.
+          </p>
+        </div>
+      </section>
+
+      <footer className="border-t border-border py-10 px-6 text-sm text-muted-foreground bg-card">
+        <div className="container mx-auto max-w-5xl mb-8 grid sm:grid-cols-3 gap-6 text-center sm:text-left border-b border-border pb-8">
+          <div>
+            <p className="font-bold text-foreground uppercase tracking-wider text-xs mb-1">The Construction Authority LLC</p>
+            <p className="text-xs">705 Camelia Ave</p>
+            <p className="text-xs">LaPlace, LA 70068</p>
+          </div>
+          <div>
+            <p className="font-bold text-foreground uppercase tracking-wider text-xs mb-1">Contact</p>
+            <p className="text-xs">(504) 332-9801</p>
+            <p className="text-xs">buildwithauthority.expert</p>
+          </div>
+          <div>
+            <p className="font-bold text-foreground uppercase tracking-wider text-xs mb-1">Services</p>
+            <p className="text-xs">Residential HVAC Replacement</p>
+            <p className="text-xs">Emergency HVAC Service</p>
+            <p className="text-xs">Electrical · Master Natural Gas Fitter</p>
+          </div>
+        </div>
+        <div className="container mx-auto max-w-5xl flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+          <div className="flex flex-col gap-1">
+            <span>© 2026 The Construction Authority LLC — Louisiana · Licensed · Insured</span>
+            <Link to="/login" className="text-[10px] hover:text-primary transition-colors uppercase tracking-widest mt-1">Team Portal Login</Link>
+            <div className="flex gap-4 mt-2">
+              <Link to="/privacy-policy" className="text-[10px] hover:text-primary transition-colors uppercase tracking-widest">Privacy Policy</Link>
+              <Link to="/terms" className="text-[10px] hover:text-primary transition-colors uppercase tracking-widest">Terms of Service</Link>
+            </div>
+          </div>
+          <div className="text-[10px] text-center sm:text-right max-w-xs text-muted-foreground/70">
+            SMS communications are sent by The Construction Authority LLC. Msg &amp; data rates may apply. Reply STOP to opt out.
+          </div>
+        </div>
+      </footer>
+
+      <EmergencyWidget isOpen={isEmergencyOpen} onOpenChange={setIsEmergencyOpen} />
+      <CallbackWidget isOpen={isCallbackOpen} onOpenChange={setIsCallbackOpen} />
+    </div>
+  );
+};
+
+export default Index;
+src/pages/Login.tsx
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Lock, User } from "lucide-react";
+import { toast } from "sonner";
+
+const TECH_ACCOUNTS: Record<string, string> = {
+  "craig": "craig123",
+  "rodney": "rodney123",
+  "douglas": "douglas123",
+  "joshua": "joshua123",
+  "roy": "roy123",
+  "windell": "windell123",
+  "tech": "tech123",
+};
+
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    const user = username.toLowerCase().trim();
+    if (user === "admin" && password === "admin123") {
+      localStorage.setItem("userRole", "admin");
+      localStorage.setItem("userName", "Admin");
+      toast.success("Welcome back, Admin!");
+      navigate("/admin");
+    } else if (TECH_ACCOUNTS[user] && password === TECH_ACCOUNTS[user]) {
+      localStorage.setItem("userRole", "tech");
+      localStorage.setItem("userName", user.charAt(0).toUpperCase() + user.slice(1));
+      toast.success(`Stay safe out there, ${user.charAt(0).toUpperCase() + user.slice(1)}!`);
+      navigate("/tech");
+    } else {
+      toast.error("Invalid credentials. Please try again.");
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-muted/30 p-4">
+      <Card className="w-full max-w-md shadow-xl border-border/50">
+        <CardHeader className="space-y-1 text-center">
+          <div className="flex justify-center mb-4">
+            <div className="bg-primary/10 p-3 rounded-full">
+              <Lock className="w-6 h-6 text-primary" />
+            </div>
+          </div>
+          <CardTitle className="text-2xl font-bold font-heading">Team Login</CardTitle>
+          <CardDescription>Access The Construction Authority internal systems</CardDescription>
+        </CardHeader>
+        <form onSubmit={handleLogin}>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="username">Username</Label>
+              <div className="relative">
+                <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input id="username" placeholder="e.g. craig, rodney, admin" className="pl-10" value={username} onChange={(e) => setUsername(e.target.value)} required />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input id="password" type="password" placeholder="••••••••" className="pl-10" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button type="submit" className="w-full font-bold uppercase tracking-wider h-12 shadow-[0_4px_0_0_#9c3e2e] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] transition-all">Sign In</Button>
+          </CardFooter>
+        </form>
+      </Card>
+    </div>
+  );
+};
+
+export default Login;
+src/pages/AdminDashboard.tsx
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
+import { QuoteWidget } from "@/components/QuoteWidget";
+import { CallbackWidget } from "@/components/CallbackWidget";
+import { LayoutDashboard, Users, AlertCircle, Calendar, TrendingUp, LogOut, Clock, Phone, MapPin, Wrench, Calculator } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+const MOCK_LEADS = [
+  { id: 1, name: "John Smith", type: "Emergency", status: "Pending", time: "10 mins ago", issue: "60-min Response Needed" },
+  { id: 2, name: "Sarah Miller", type: "Quote", status: "New", time: "45 mins ago", issue: "Replace HVAC System" },
+  { id: 3, name: "Robert Wilson", type: "Callback", status: "Contacted", time: "2 hrs ago", issue: "Air blowing hot" },
+  { id: 4, name: "Emily Brown", type: "Emergency", status: "In Progress", time: "3 hrs ago", issue: "3-hr Response Needed" },
+];
+
+const MOCK_TECHS = [
+  { id: 1, name: "Tech 1 (You)", status: "En Route", location: "123 Bayou Dr", job: "Emergency - John Smith" },
+  { id: 2, name: "Mike Davis", status: "In Progress", location: "882 Highland Rd", job: "Install Quote" },
+  { id: 3, name: "Chris P.", status: "Available", location: "Office", job: "None" },
+];
+
+const AdminDashboard = () => {
+  const [isCallbackOpen, setIsCallbackOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => { localStorage.removeItem("userRole"); navigate("/login"); };
+
+  const stats = [
+    { label: "Active Emergency", value: "3", icon: AlertCircle, color: "text-red-500", bg: "bg-red-50" },
+    { label: "Pending Quotes", value: "12", icon: Clock, color: "text-blue-500", bg: "bg-blue-50" },
+    { label: "Tech Payouts (Mo)", value: "$17.0k", icon: Users, color: "text-purple-500", bg: "bg-purple-50" },
+    { label: "Company Profit (Mo)", value: "$11.9k", icon: TrendingUp, color: "text-green-500", bg: "bg-green-50" },
+  ];
+
+  return (
+    <div className="min-h-screen bg-muted/20 flex flex-col md:flex-row">
+      <aside className="w-full md:w-64 bg-card border-r border-border p-6 flex flex-col gap-8">
+        <div className="flex items-center gap-3">
+          <div className="bg-primary/10 p-2 rounded"><LayoutDashboard className="text-primary w-5 h-5" /></div>
+          <span className="font-heading font-bold text-lg">OFFICE ADMIN</span>
+        </div>
+        <nav className="flex flex-col gap-2 flex-1">
+          <Button variant="ghost" className="justify-start gap-3 bg-primary/10 text-primary font-bold"><TrendingUp size={18} /> Overview</Button>
+          <Button variant="ghost" className="justify-start gap-3"><Users size={18} /> Leads & Quotes</Button>
+          <Button variant="ghost" className="justify-start gap-3"><AlertCircle size={18} /> Emergency Calls</Button>
+          <Button variant="ghost" className="justify-start gap-3"><Calendar size={18} /> Schedule</Button>
+        </nav>
+        <Button variant="outline" className="mt-auto gap-2 text-destructive border-destructive/20 hover:bg-destructive/10" onClick={handleLogout}><LogOut size={18} /> Logout</Button>
+      </aside>
+
+      <main className="flex-1 p-4 md:p-8 overflow-y-auto">
+        <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+          <div>
+            <h1 className="text-3xl font-bold font-heading">Dashboard Overview</h1>
+            <p className="text-muted-foreground">Manage leads and operations for The Construction Authority</p>
+          </div>
+          <div className="flex gap-2">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="bg-[#C57B3D] hover:bg-[#d98f52] text-[#0C141B] font-bold shadow-[0_4px_0_0_#9c6130] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] transition-all h-10 px-6">
+                  <Calculator size={18} className="mr-2" /> Build Quote & View Pricing
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0">
+                <DialogTitle className="sr-only">Build Quote</DialogTitle>
+                <div className="p-6 bg-background">
+                  <QuoteWidget onOpenCallback={() => setIsCallbackOpen(true)} initialScope="complete" onScopeChange={() => {}} />
+                </div>
+              </DialogContent>
+            </Dialog>
+            <Button className="bg-[#461D7C] text-[#FDD023] font-bold">Today's Schedule</Button>
+            <Button variant="outline">Export Data</Button>
+          </div>
+        </header>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {stats.map((stat, i) => (
+            <Card key={i} className="border-border/50">
+              <CardContent className="p-6 flex items-center gap-4">
+                <div className={`${stat.bg} p-3 rounded-full"><stat.icon className={`${stat.color} w-6 h-6`} /></div>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
+                  <p className="text-2xl font-bold">{stat.value}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <Card className="border-border/50 shadow-sm lg:col-span-2">
+            <CardHeader><CardTitle className="font-heading">Recent Inbound Requests</CardTitle></CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {MOCK_LEADS.map((lead) => (
+                  <div key={lead.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border rounded-lg bg-card hover:bg-muted/30 transition-colors gap-4">
+                    <div className="flex items-center gap-4">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-white ${lead.type === 'Emergency' ? 'bg-red-500' : 'bg-primary'}`}>{lead.name.charAt(0)}</div>
+                      <div>
+                        <p className="font-bold">{lead.name}</p>
+                        <p className="text-sm text-muted-foreground flex items-center gap-1"><Clock size={12} /> {lead.time} • <span className="font-medium">{lead.issue}</span></p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Badge variant={lead.type === 'Emergency' ? 'destructive' : 'default'} className="uppercase tracking-tighter">{lead.type}</Badge>
+                      <Button size="sm" variant="outline">View Details</Button>
+                      <Button size="sm" className="bg-primary/10 text-primary hover:bg-primary/20 border-primary/20">Assign Tech</Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-border/50 shadow-sm">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="font-heading text-lg">Tech Status</CardTitle>
+              <Button variant="outline" size="sm" className="h-8 text-xs">View Map</Button>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4 pt-4">
+                {MOCK_TECHS.map((tech) => (
+                  <div key={tech.id} className="flex flex-col p-3 border rounded-lg bg-muted/20 gap-2">
+                    <div className="flex justify-between items-center">
+                      <p className="font-bold">{tech.name}</p>
+                      <Badge variant={tech.status === 'Available' ? 'secondary' : (tech.status === 'En Route' ? 'default' : 'outline')} className="text-[10px] uppercase">{tech.status}</Badge>
+                    </div>
+                    <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1"><MapPin size={12} /> {tech.location}</span>
+                      <span className="flex items-center gap-1"><Wrench size={12} /> {tech.job}</span>
+                    </div>
+                  </div>
+                ))}
+                <Button className="w-full mt-2 gap-2" variant="secondary"><Phone size={16} /> Dispatch Broadcast</Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-border/50 shadow-sm lg:col-span-3">
+            <CardHeader><CardTitle className="font-heading">Company Profit Distribution (MTD)</CardTitle></CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <div className="flex justify-between items-end">
+                    <p className="text-xs font-bold uppercase text-muted-foreground">Equipment Costs (32%)</p>
+                    <p className="text-lg font-bold">$13,600</p>
+                  </div>
+                  <div className="w-full h-2 bg-muted rounded-full overflow-hidden"><div className="bg-blue-400 h-full w-[32%]" /></div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-end">
+                    <p className="text-xs font-bold uppercase text-muted-foreground">Company Net (28%)</p>
+                    <p className="text-lg font-bold">$11,900</p>
+                  </div>
+                  <div className="w-full h-2 bg-muted rounded-full overflow-hidden"><div className="bg-green-500 h-full w-[28%]" /></div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-end">
+                    <p className="text-xs font-bold uppercase text-muted-foreground">Tech Payouts (40%)</p>
+                    <p className="text-lg font-bold">$17,000</p>
+                  </div>
+                  <div className="w-full h-2 bg-muted rounded-full overflow-hidden"><div className="bg-purple-500 h-full w-[40%]" /></div>
+                </div>
+              </div>
+              <div className="mt-6 pt-6 border-t border-border flex justify-between items-center">
+                <p className="text-sm font-medium">Total Managed Volume (Mo)</p>
+                <p className="text-xl font-bold text-primary">$42,500.00</p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </main>
+      <CallbackWidget isOpen={isCallbackOpen} onOpenChange={setIsCallbackOpen} />
+    </div>
+  );
+};
+
+export default AdminDashboard;
+src/pages/TechView.tsx
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
+import { QuoteWidget } from "@/components/QuoteWidget";
+import { JobCloseoutForm } from "@/components/JobCloseoutForm";
+import { CallbackWidget } from "@/components/CallbackWidget";
+import { Wrench, MapPin, Phone, Clock, CheckCircle2, LogOut, Navigation, MessageSquare, Calendar, Users, Camera, PenTool, Calculator, Package } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { toast } from "sonner";
+
+const TechView = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => { localStorage.removeItem("userRole"); navigate("/login"); };
+  const userName = localStorage.getItem("userName") || "Tech";
+  const [jobStatus, setJobStatus] = useState("en_route");
+  const [closeoutOpen, setCloseoutOpen] = useState(false);
+  const [isCallbackOpen, setIsCallbackOpen] = useState(false);
+  const [savedQuotes, setSavedQuotes] = useState<any[]>([]);
+
+  useEffect(() => {
+    const loadQuotes = () => { setSavedQuotes(JSON.parse(localStorage.getItem('tech_quotes') || '[]')); };
+    loadQuotes();
+    window.addEventListener('quotesUpdated', loadQuotes);
+    return () => window.removeEventListener('quotesUpdated', loadQuotes);
+  }, []);
+
+  const ASSIGNED_JOBS = [
+    { id: 1, customer: "John Smith", address: "123 Bayou Dr, Baton Rouge, LA", type: "Emergency", eta: "14:45 (60-min)", issue: "Outdoor unit not running", status: "En Route" },
+    { id: 2, customer: "Sarah Miller", address: "456 Highland Rd, Baton Rouge, LA", type: "Quote Install", eta: "Tomorrow 09:00", issue: "Replace 3-ton HVAC System", status: "Scheduled" }
+  ];
+
+  return (
+    <div className="min-h-screen bg-muted/10 p-4 pb-20">
+      <header className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="bg-primary/10 p-2 rounded-full"><Wrench className="text-primary w-5 h-5" /></div>
+          <div>
+            <h1 className="font-heading font-bold text-lg leading-tight">TECH PORTAL</h1>
+            <p className="text-xs text-muted-foreground uppercase tracking-widest">Hello <span className="text-lg font-black text-foreground">{userName}</span> This will be a great Day</p>
+          </div>
+        </div>
+        <Button variant="ghost" size="icon" onClick={handleLogout} className="text-muted-foreground"><LogOut size={20} /></Button>
+      </header>
+
+      <div className="grid grid-cols-2 gap-4 mb-8">
+        <Card className="bg-primary text-primary-foreground border-none shadow-md">
+          <CardContent className="p-4">
+            <p className="text-[10px] uppercase font-bold tracking-widest opacity-80 mb-1">MTD Earnings</p>
+            <p className="text-2xl font-bold font-heading">$4,850.00</p>
+            <p className="text-[9px] mt-1 opacity-70">40% Profit Share</p>
+          </CardContent>
+        </Card>
+        <Card className="bg-card border-border shadow-sm">
+          <CardContent className="p-4">
+            <p className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground mb-1">YTD Earnings</p>
+            <p className="text-2xl font-bold font-heading text-primary">$52,420.00</p>
+            <p className="text-[9px] mt-1 text-muted-foreground">2026 Performance</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="mb-8">
+        <h2 className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-3 px-1">Active Assignment</h2>
+        <Card className="border-primary/30 shadow-lg bg-card">
+          <CardHeader className="pb-2">
+            <div className="flex justify-between items-start">
+              <Badge variant="destructive" className="animate-pulse mb-2">EMERGENCY</Badge>
+              <span className="text-xs font-bold text-primary">ID: #4921</span>
+            </div>
+            <CardTitle className="text-2xl font-heading">{ASSIGNED_JOBS[0].customer}</CardTitle>
+            <CardDescription className="flex items-center gap-1 text-foreground/80"><MapPin size={14} className="text-primary" /> {ASSIGNED_JOBS[0].address}</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4 pt-2">
+            <div className="bg-muted/50 p-4 rounded-lg flex justify-between items-center border border-border/50">
+              <div>
+                <p className="text-xs text-muted-foreground uppercase font-bold">Target ETA</p>
+                <p className="text-lg font-bold text-primary">{ASSIGNED_JOBS[0].eta}</p>
+              </div>
+              <div className="text-right">
+                <p className="text-xs text-muted-foreground uppercase font-bold">Issue</p>
+                <p className="font-medium">{ASSIGNED_JOBS[0].issue}</p>
+              </div>
+            </div>
+            <div className="space-y-3">
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-bold text-muted-foreground uppercase">Update Status</label>
+                <Select value={jobStatus} onValueChange={(val) => { setJobStatus(val); toast.success(`Status updated to ${val.replace('_', ' ')}`); }}>
+                  <SelectTrigger className="w-full h-12 font-bold"><SelectValue placeholder="Select status" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="en_route">🚗 En Route</SelectItem>
+                    <SelectItem value="arrived">📍 Arrived</SelectItem>
+                    <SelectItem value="in_progress">🔧 In Progress</SelectItem>
+                    <SelectItem value="waiting_parts">📦 Waiting on Parts</SelectItem>
+                    <SelectItem value="completed">✅ Completed</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <Button variant="outline" className="w-full gap-2 font-bold h-12 border-primary/20 hover:bg-primary/5" onClick={() => toast("Camera opened")}><Camera size={18} /> Photos/Notes</Button>
+                <Button variant="outline" className="w-full gap-2 font-bold h-12 border-primary/20 hover:bg-primary/5" onClick={() => toast("Parts request form opened")}><Package size={18} /> Request Parts</Button>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <Button className="w-full gap-2 font-bold bg-[#23718A] hover:bg-[#1a5569] h-12 shadow-[0_4px_0_0_#123d4a] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] transition-all"><Navigation size={18} /> Navigate</Button>
+                <Button variant="outline" className="w-full gap-2 font-bold h-12 border-primary/20 hover:bg-primary/5"><Phone size={18} /> Call</Button>
+              </div>
+            </div>
+            <div className="pt-2 flex flex-col gap-3">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button className="w-full gap-2 font-bold h-16 text-lg bg-[#C57B3D] hover:bg-[#d98f52] text-[#0C141B] shadow-[0_4px_0_0_#9c6130] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] transition-all mb-2">
+                    <Calculator size={24} /> BUILD QUOTE & VIEW PRICING
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0">
+                  <DialogTitle className="sr-only">Build Quote</DialogTitle>
+                  <div className="p-6 bg-background">
+                    <QuoteWidget onOpenCallback={() => setIsCallbackOpen(true)} initialScope="complete" onScopeChange={() => {}} />
+                  </div>
+                </DialogContent>
+              </Dialog>
+              <Button variant="secondary" className="w-full gap-2 font-bold h-12 border border-border/50" onClick={() => toast("Signature pad opened")}><PenTool size={18} /> Collect Signature</Button>
+              <Dialog open={closeoutOpen} onOpenChange={setCloseoutOpen}>
+                <DialogTrigger asChild>
+                  <Button className="w-full gap-2 font-bold h-14 text-lg shadow-[0_4px_0_0_#9c3e2e] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] transition-all"><CheckCircle2 size={20} /> Complete Job & Invoice</Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-3xl max-h-[95vh] overflow-hidden p-6">
+                  <DialogTitle className="sr-only">Job Closeout Form</DialogTitle>
+                  <JobCloseoutForm onComplete={() => setCloseoutOpen(false)} />
+                </DialogContent>
+              </Dialog>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-sm font-bold text-muted-foreground uppercase tracking-widest px-1">Upcoming Jobs</h2>
+        {ASSIGNED_JOBS.slice(1).map((job) => (
+          <Card key={job.id} className="border-border/50 shadow-sm">
+            <CardContent className="p-4 flex items-center justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-1">
+                  <p className="font-bold">{job.customer}</p>
+                  <Badge variant="outline" className="text-[10px] uppercase font-bold h-4">{job.type}</Badge>
+                </div>
+                <p className="text-xs text-muted-foreground flex items-center gap-1"><Clock size={12} /> {job.eta}</p>
+              </div>
+              <Button variant="ghost" size="icon" className="text-primary"><MessageSquare size={20} /></Button>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <div className="mt-8 mb-4">
+        <h2 className="text-sm font-bold text-muted-foreground uppercase tracking-widest px-1 mb-3">Recent Payouts</h2>
+        <Card className="border-border/50 shadow-sm">
+          <CardContent className="p-0">
+            <div className="divide-y divide-border">
+              {[
+                { date: "Jul 15", job: "Emergency - John Smith", amount: "$385.00" },
+                { date: "Jul 12", job: "Install - Sarah Miller", amount: "$1,840.00" },
+                { date: "Jul 10", job: "Repair - Mike Ross", amount: "$112.50" },
+              ].map((payout, i) => (
+                <div key={i} className="flex justify-between items-center p-4">
+                  <div>
+                    <p className="text-xs font-bold text-primary">{payout.date}</p>
+                    <p className="text-sm font-medium">{payout.job}</p>
+                  </div>
+                  <p className="font-bold text-green-600">{payout.amount}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {savedQuotes.length > 0 && (
+        <div className="mt-8 mb-8">
+          <h2 className="text-sm font-bold text-muted-foreground uppercase tracking-widest px-1 mb-3">Saved Quotes</h2>
+          <Card className="border-border/50 shadow-sm">
+            <CardContent className="p-0">
+              <div className="divide-y divide-border">
+                {savedQuotes.map((quote) => (
+                  <div key={quote.id} className="flex justify-between items-center p-4">
+                    <div>
+                      <p className="text-xs font-bold text-primary">{quote.date} - {quote.name}</p>
+                      <p className="text-sm font-medium">{quote.sqft} sqft · {quote.fuel}</p>
+                      <p className="text-xs text-muted-foreground">{quote.phone}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-bold text-foreground">{quote.recommendedSize}-ton</p>
+                      <p className="text-xs text-muted-foreground uppercase">{quote.scope}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border px-6 py-3 flex justify-between items-center shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+        <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto p-1 text-primary"><Wrench size={22} /><span className="text-[10px] font-bold uppercase">Jobs</span></Button>
+        <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto p-1 text-muted-foreground"><Calendar size={22} /><span className="text-[10px] font-bold uppercase">Schedule</span></Button>
+        <Button variant="ghost" className="flex flex-col items-center gap-1 h-auto p-1 text-muted-foreground"><Users size={22} /><span className="text-[10px] font-bold uppercase">Team</span></Button>
+      </nav>
+      <CallbackWidget isOpen={isCallbackOpen} onOpenChange={setIsCallbackOpen} />
+    </div>
+  );
+};
+
+export default TechView;
+src/pages/PrivacyPolicy.tsx
+import { Link } from "react-router-dom";
+
+const PrivacyPolicy = () => {
+  return (
+    <div className="min-h-screen bg-background py-16 px-6">
+      <div className="container mx-auto max-w-3xl bg-card p-8 rounded-lg shadow-sm border border-border">
+        <h1 className="font-heading text-3xl font-bold mb-8">Privacy Policy — The Construction Authority LLC</h1>
+        <p className="text-muted-foreground mb-4 italic">Last Updated: July 16, 2026</p>
+        <section className="mb-8">
+          <h2 className="text-xl font-bold mb-4">Information We Collect</h2>
+          <p className="text-muted-foreground">We collect information you provide when filling out forms on our website, including your name, email address, phone number, and project details.</p>
+        </section>
+        <section className="mb-8">
+          <h2 className="text-xl font-bold mb-4">How We Use Your Information</h2>
+          <p className="text-muted-foreground">We use your information to respond to inquiries, provide quotes, deliver services, and send SMS/email communications you have consented to receive.</p>
+        </section>
+        <section className="mb-8">
+          <h2 className="text-xl font-bold mb-4">SMS Marketing Communications</h2>
+          <p className="text-muted-foreground">The Construction Authority LLC may use your phone number to send you SMS marketing messages, including promotional offers, service updates, and quote follow-ups. You provide consent by checking the opt-in box on our contact form. Message frequency varies. Msg & data rates may apply. You may opt out at any time by replying STOP to any message. For help, reply HELP. We do not share your phone number with third parties for marketing purposes.</p>
+        </section>
+        <section className="mb-8">
+          <h2 className="text-xl font-bold mb-4">Sharing of Information</h2>
+          <p className="text-muted-foreground">We do not sell or share your personal information with third parties except as required to deliver our services or comply with the law.</p>
+        </section>
+        <section className="mb-8">
+          <h2 className="text-xl font-bold mb-4">Contact Us</h2>
+          <p className="text-muted-foreground">The Construction Authority LLC | Phone: (504) 332-9801 | Website: buildwithauthority.expert</p>
+        </section>
+        <div className="mt-12 pt-8 border-t border-border">
+          <Link to="/" className="text-primary hover:underline">← Return to Home</Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PrivacyPolicy;
+src/pages/TermsOfService.tsx
+import { Link } from "react-router-dom";
+
+const TermsOfService = () => {
+  return (
+    <div className="min-h-screen bg-background py-16 px-6">
+      <div className="container mx-auto max-w-3xl bg-card p-8 rounded-lg shadow-sm border border-border">
+        <h1 className="font-heading text-3xl font-bold mb-8">Terms of Service — The Construction Authority LLC</h1>
+        <p className="text-muted-foreground mb-4 italic">Last Updated: July 16, 2026</p>
+        <section className="mb-8">
+          <h2 className="text-xl font-bold mb-4">Services</h2>
+          <p className="text-muted-foreground">The Construction Authority LLC provides professional website design and development services. By contacting us or submitting a form, you agree to these terms.</p>
+        </section>
+        <section className="mb-8">
+          <h2 className="text-xl font-bold mb-4">SMS Messaging</h2>
+          <p className="text-muted-foreground">By submitting your phone number and checking the consent box, you agree to receive SMS messages from The Construction Authority LLC regarding your inquiry, project updates, and promotional offers. You may opt out at any time by replying STOP.</p>
+        </section>
+        <section className="mb-8">
+          <h2 className="text-xl font-bold mb-4">Limitation of Liability</h2>
+          <p className="text-muted-foreground">The Construction Authority LLC is not liable for any indirect or consequential damages arising from use of our services.</p>
+        </section>
+        <section className="mb-8">
+          <h2 className="text-xl font-bold mb-4">Governing Law</h2>
+          <p className="text-muted-foreground">These terms are governed by the laws of the State of Louisiana.</p>
+        </section>
+        <section className="mb-8">
+          <h2 className="text-xl font-bold mb-4">Contact</h2>
+          <p className="text-muted-foreground">The Construction Authority LLC | (504) 332-9801 | buildwithauthority.expert</p>
+        </section>
+        <div className="mt-12 pt-8 border-t border-border">
+          <Link to="/" className="text-primary hover:underline">← Return to Home</Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TermsOfService;
+src/pages/NotFound.tsx
+import { useLocation, Link } from "react-router-dom";
+import { useEffect } from "react";
+
+const NotFound = () => {
+  const location = useLocation();
+  useEffect(() => {
+    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+  }, [location.pathname]);
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-muted">
+      <div className="text-center">
+        <h1 className="mb-4 text-4xl font-bold">404</h1>
+        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
+        <Link to="/" className="text-primary underline hover:text-primary/90">Return to Home</Link>
+      </div>
+    </div>
+  );
+};
+
+export default NotFound;
+src/components/NavLink.tsx
+import { NavLink as RouterNavLink, NavLinkProps } from "react-router-dom";
+import { forwardRef } from "react";
+import { cn } from "@/lib/utils";
+
+interface NavLinkCompatProps extends Omit<NavLinkProps, "className"> {
+  className?: string;
+  activeClassName?: string;
+  pendingClassName?: string;
+}
+
+const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
+  ({ className, activeClassName, pendingClassName, to, ...props }, ref) => {
+    return (
+      <RouterNavLink
+        ref={ref}
+        to={to}
+        className={({ isActive, isPending }) => cn(className, isActive && activeClassName, isPending && pendingClassName)}
+        {...props}
+      />
+    );
+  },
+);
+
+NavLink.displayName = "NavLink";
+export { NavLink };
+src/components/QuoteWidget.tsx
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { CheckCircle2, Phone } from "lucide-react";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Link } from "react-router-dom";
+
+type StandardTrackingFieldKey = string;
+type RegisteredCustomFieldId = string;
+type TrackingCustomField = { value?: unknown; label: string };
+type TrackingFileField = { file?: File; label: string };
+type TrackingImageDataField = { dataUrl?: string; label: string };
+
+const postTrackingEvent = (
+  trackingPayload: Record<string, unknown> & {
+    formData: Record<StandardTrackingFieldKey, unknown>;
+    formLabels: Record<StandardTrackingFieldKey, string>;
+  },
+  options: {
+    customFields?: Record<RegisteredCustomFieldId, TrackingCustomField>;
+    fileFields?: Record<RegisteredCustomFieldId, TrackingFileField>;
+    imageDataFields?: Record<RegisteredCustomFieldId, TrackingImageDataField>;
+  } = {},
+) => {
+  const { customFields = {}, fileFields = {}, imageDataFields = {} } = options;
+  const eventPayload = {
+    ...trackingPayload,
+    formData: { ...trackingPayload.formData },
+    formLabels: { ...trackingPayload.formLabels },
+  };
+  const body = new FormData();
+
+  for (const [key, field] of Object.entries(customFields)) {
+    if (field.value === undefined) continue;
+    eventPayload.formData[key] = field.value;
+    eventPayload.formLabels[key] = field.label;
+  }
+  for (const [key, field] of Object.entries(imageDataFields)) {
+    const dataUrl = field.dataUrl;
+    if (!dataUrl) continue;
+    if (!dataUrl.startsWith("data:image/")) {
+      throw new Error("Image data field must be a data:image/* base64 string");
+    }
+    eventPayload.formData[key] = dataUrl;
+    eventPayload.formLabels[key] = field.label;
+  }
+  for (const [key, field] of Object.entries(fileFields)) {
+    const file = field.file;
+    if (!file) continue;
+    if (file.size > 50 * 1024 * 1024) {
+      throw new Error("File must be 50 MB or smaller");
+    }
+    eventPayload.formData[key] = { filename: file.name, size: file.size, type: file.type || "application/octet-stream" };
+    eventPayload.formLabels[key] = field.label;
+    body.append(key, file, file.name);
+  }
+  for (const key of Object.keys(eventPayload.formData)) {
+    eventPayload.formLabels[key] ||= key;
+  }
+  body.append("event", JSON.stringify(eventPayload));
+
+  fetch("https://backend.leadconnectorhq.com/external-tracking/events", {
+    method: "POST",
+    headers: { version: "2021-07-28" },
+    body,
+  }).catch(() => {});
+};
+
+// Pricing Logic
+const SIZES = [2, 2.5, 3, 3.5, 4, 4.5, 5];
+const BUNDLE = {
+  electric: { 2: 2671.91, 2.5: 2982.47, 3: 3293.03, 3.5: 3603.59, 4: 3914.15, 4.5: 4224.71, 5: 4535.27 },
+  gas: { 2: 3215.75, 2.5: 3480.15, 3: 3744.55, 3.5: 4008.95, 4: 4273.35, 4.5: 4537.75, 5: 4802.15 }
+};
+const LABOR = 1950;
+const MULT = 1.75;
+const DISCOUNT = 500;
+
+const BRANDS = {
+  Oxbox: { label: "Oxbox", type: "dollar", value: -400, desc: "Most affordable · reliable comfort", tag: "Affordable" },
+  Rheem: { label: "Rheem", type: "none", value: 0, desc: "Trusted industry standard", tag: null },
+  Goodman: { label: "Goodman", type: "percent", value: 10, desc: "Great value, solid warranty", tag: null },
+  Lennox: { label: "Lennox", type: "percent", value: 15, desc: "High efficiency, lower bills", tag: null },
+  AmericanStandard: { label: "American Standard", type: "percent", value: 25, desc: "Top-tier, quietest, best warranty", tag: "Premium" }
+};
+
+const CREDIT = {
+  excellent: { label: "Excellent", range: "741–850", rates: { 3: 8.99, 5: 10.49, 7: 6.99 } },
+  good: { label: "Good", range: "681–740", rates: { 3: 12.99, 5: 19.37, 7: 9.99 } },
+  average: { label: "Average", range: "661–680", rates: { 3: 17.99, 5: 24.99, 7: 14.99 } }
+};
+
+const sizeFor = (sqft: number) => {
+  const raw = sqft / 500;
+  if (!raw || raw <= 0) return 2;
+  for (let i = 0; i < SIZES.length; i++) {
+    if (raw <= SIZES[i]) return SIZES[i];
+  }
+  return 5;
+};
+
+const brandBundle = (brand: string, base: number) => {
+  const r = BRANDS[brand as keyof typeof BRANDS];
+  if (r.type === "dollar") return Math.max(0, base + r.value);
+  if (r.type === "percent") return base * (1 + r.value / 100);
+  return base;
+};
+
+const monthlyPayment = (p: number, apr: number | null, yrs: number) => {
+  if (apr === null) return null;
+  const n = yrs * 12;
+  const r = (apr / 100) / 12;
+  if (!r) return p / n;
+  return p * r / (1 - Math.pow(1 + r, -n));
+};
+
+const money = (v: number) => "$" + Math.round(v).toLocaleString("en-US");
+
+export const QuoteWidget = ({ onOpenCallback, initialScope = "complete", onScopeChange }: { onOpenCallback?: () => void, initialScope?: "complete" | "condenser", onScopeChange?: (s: "complete" | "condenser") => void }) => {
+  const [step, setStep] = useState(1);
+  const [form, setForm] = useState({ fName: "", fPhone: "", fEmail: "", fZip: "", fSqft: "" });
+  const [fuel, setFuel] = useState<"Electric" | "Gas">("Electric");
+  const [credit, setCredit] = useState<"excellent" | "good" | "average">("good");
+  const [term, setTerm] = useState<3 | 5 | 7>(5);
+  const [brand, setBrand] = useState("Oxbox");
+  const [scope, setScope] = useState<"complete" | "condenser">(initialScope);
+  const [smsConsent, setSmsConsent] = useState(false);
+  const [error, setError] = useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [bookingComplete, setBookingComplete] = useState(false);
+
+  useEffect(() => { setScope(initialScope); }, [initialScope]);
+
+  const handleScopeChange = (newScope: "complete" | "condenser") => {
+    setScope(newScope);
+    onScopeChange?.(newScope);
+  };
+
+  const handleReset = () => {
+    setStep(1);
+    setForm({ fName: "", fPhone: "", fEmail: "", fZip: "", fSqft: "" });
+    setFuel("Electric");
+    setCredit("good");
+    setTerm(5);
+    setBrand("Oxbox");
+    setSmsConsent(false);
+    setBookingComplete(false);
+    setError(false);
+  };
+
+  useEffect(() => {
+    if (step === 4) {
+      const script = document.createElement("script");
+      script.src = "https://link.msgsndr.com/js/form_embed.js";
+      script.async = true;
+      document.body.appendChild(script);
+      const handleMessage = (e: MessageEvent) => {
+        if (e.data && typeof e.data === 'string' && e.data.includes('booking')) {
+          setBookingComplete(true); setIsCalendarOpen(false);
+        } else if (e.data && typeof e.data === 'object' && e.data.type && e.data.type.includes('booking')) {
+          setBookingComplete(true); setIsCalendarOpen(false);
+        }
+      };
+      window.addEventListener("message", handleMessage);
+      return () => {
+        if (document.body.contains(script)) document.body.removeChild(script);
+        window.removeEventListener("message", handleMessage);
+      };
+    }
+  }, [step]);
+
+  const sqftNum = Number(form.fSqft) || 0;
+  const recommendedSize = sizeFor(sqftNum);
+
+  const priceFor = (b: string) => {
+    let base = 0;
+    if (scope === "condenser") {
+      base = BUNDLE["gas"][recommendedSize as keyof typeof BUNDLE["gas"]];
+    } else {
+      const fuelKey = fuel === "Gas" ? "gas" : "electric";
+      base = BUNDLE[fuelKey][recommendedSize as keyof typeof BUNDLE["electric"]];
+    }
+    const bundle = brandBundle(b, base);
+    let total = Math.round((bundle + LABOR) * MULT);
+    if (scope === "condenser") { total = Math.round(total / 2); }
+    total += 600;
+    return { size: recommendedSize, total, discounted: total - DISCOUNT };
+  };
+
+  const currentApr = CREDIT[credit].rates[term];
+  const selectedPrice = priceFor(brand);
+
+  const handleNext = () => {
+    if (step === 1) {
+      if (form.fName.length > 1 && form.fPhone.replace(/\D/g, "").length >= 10 && /.+@.+\..+/.test(form.fEmail) && form.fZip.replace(/\D/g, "").length >= 5 && sqftNum > 0) {
+        setError(false); setStep(2);
+      } else { setError(true); }
+    } else if (step === 2) {
+      const trackingPayload = {
+        type: "external_form_submission", timestamp: Date.now(), formId: "Quote Widget Form",
+        formData: { first_name: form.fName, phone: form.fPhone, email: form.fEmail, postal_code: form.fZip },
+        formLabels: { first_name: "Full name", phone: "Mobile phone", email: "Email", postal_code: "ZIP" },
+        url: window.location.href, title: document.title, path: window.location.pathname, userAgent: navigator.userAgent,
+        trackingId: "tk_7ff1b0689e60408f88a2d02eb3a7a53b", locationId: "9ULMhTLldtjgNRGX0xVP", sessionId: crypto.randomUUID(),
+        properties: { deviceType: /Mobile|Android|iPhone/i.test(navigator.userAgent) ? "mobile" : "desktop" },
+      };
+      postTrackingEvent(trackingPayload, {
+        customFields: {
+          "OJmV5NnWLMCRMTub9Fny": { value: sqftNum, label: "Square Footage" },
+          "uejWmZ1gudxJjqTZPmvs": { value: fuel, label: "Current System Fuel" },
+          "6jctk6jxIl8aOcjkPMwl": { value: brand, label: "Selected Brand" },
+          "HZKAuosVGZvc1odYJfPh": { value: scope, label: "System Scope" },
+          "kOeubDFuWKWKwo0FuJM1": { value: credit, label: "Credit Tier" },
+          "SgNh3tVDsBRQckxRRHMF": { value: term, label: "Financing Term" }
+        }
+      });
+      const isTeam = window.location.pathname.includes('/tech') || window.location.pathname.includes('/admin');
+      if (isTeam) {
+        const savedQuotes = JSON.parse(localStorage.getItem('tech_quotes') || '[]');
+        const newQuote = { id: Date.now(), date: new Date().toLocaleDateString(), name: form.fName, phone: form.fPhone, email: form.fEmail, sqft: sqftNum, fuel, scope, recommendedSize };
+        localStorage.setItem('tech_quotes', JSON.stringify([newQuote, ...savedQuotes].slice(0, 50)));
+        window.dispatchEvent(new Event('quotesUpdated'));
+      }
+      setStep(3);
+    } else if (step === 3) { setStep(4); }
+  };
+
+  return (
+    <div className="max-w-md mx-auto bg-card border border-border rounded-xl overflow-hidden shadow-2xl text-left">
+      <div key={`step-${step}`} className="animate-queen-flip origin-center [backface-visibility:hidden] will-change-transform">
+        <div className="bg-secondary/30 border-b border-border p-6">
+          <div className="flex gap-1.5 mb-4">
+            {[1, 2, 3, 4].map(i => (<div key={i} className={`flex-1 h-1.5 rounded-full ${i <= step ? "bg-primary" : "bg-border"}`} />))}
+          </div>
+          <div className="text-xs font-semibold tracking-[0.2em] text-primary uppercase mb-2">
+            STEP {step} · {step === 1 ? "YOUR INFO" : step === 2 ? "CONFIRM YOUR INFO" : step === 3 ? "PICK YOUR SYSTEM" : "GET STARTED"}
+          </div>
+          <h3 className="font-heading text-3xl font-bold uppercase leading-none">
+            {step === 1 && <>Unlock Your Price <span className="text-primary">+ $500 Off</span></>}
+            {step === 2 && "One Quick Look Before The Flip"}
+            {step === 3 && <>Your Prices <span className="text-primary">— $500 Off Applied</span></>}
+            {step === 4 && <>{scope === "complete" ? "The Install of A Complete HVAC System" : "The Complete Install of A Condenser Only"}</>}
+          </h3>
+          {step === 1 && (
+            <>
+              <p className="text-sm text-muted-foreground mt-3 mb-4">Reliable comfort, backed for 10 years — this is an investment, not a repair. Tell us where to send your quote; confirm and your prices flip into view.</p>
+              <div className="bg-card border border-border rounded p-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                <div className="flex items-start gap-2"><span className="text-primary font-bold">✔</span><span className="font-semibold">Reliable comfort <span className="text-muted-foreground font-normal block">a 10-year investment</span></span></div>
+                <div className="flex items-start gap-2"><span className="text-primary font-bold">✔</span><span className="font-semibold">0% Interest <span className="text-muted-foreground font-normal block">if you qualify</span></span></div>
+                <div className="flex items-start gap-2"><span className="text-primary font-bold">✔</span><span className="font-semibold">$500 Off <span className="text-muted-foreground font-normal block">locked in today</span></span></div>
+                <div className="flex items-start gap-2"><span className="text-primary font-bold">✔</span><span className="font-semibold">Custom units <span className="text-muted-foreground font-normal block">5 brands — your fit</span></span></div>
+              </div>
+            </>
+          )}
+          {step === 3 && (
+            <div className="bg-card border border-border rounded p-3 mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div className="flex items-start gap-2"><span className="text-primary font-bold">✔</span><span className="font-semibold">Reliable comfort</span></div>
+              <div className="flex items-start gap-2"><span className="text-primary font-bold">✔</span><span className="font-semibold">0% Interest <span className="text-muted-foreground font-normal">if you qualify</span></span></div>
+              <div className="flex items-start gap-2"><span className="text-primary font-bold">✔</span><span className="font-semibold">$500 Off <span className="text-muted-foreground font-normal">already applied</span></span></div>
+              <div className="flex items-start gap-2"><span className="text-primary font-bold">✔</span><span className="font-semibold">10-Year Warranty</span></div>
+            </div>
+          )}
+        </div>
+
+        <div className="p-6">
+        {step === 1 && (
+          <div className="space-y-5">
+            <div>
+              <Label className="text-xs tracking-wider uppercase text-muted-foreground font-semibold mb-1 block">Full name</Label>
+              <Input placeholder="Jane Doe" value={form.fName} onChange={e => setForm({...form, fName: e.target.value})} className={error && form.fName.length < 2 ? "border-destructive" : ""} />
+            </div>
+            <div>
+              <Label className="text-xs tracking-wider uppercase text-muted-foreground font-semibold mb-1 block">Mobile phone <span className="normal-case tracking-normal font-normal opacity-70">— where to text your quote</span></Label>
+              <Input type="tel" placeholder="(225) 555-0123" value={form.fPhone} onChange={e => setForm({...form, fPhone: e.target.value})} className={error && form.fPhone.replace(/\D/g,"").length < 10 ? "border-destructive" : ""} />
+            </div>
+            <div>
+              <Label className="text-xs tracking-wider uppercase text-muted-foreground font-semibold mb-1 block">Email <span className="normal-case tracking-normal font-normal opacity-70">— where to email your quote</span></Label>
+              <Input type="email" placeholder="you@email.com" value={form.fEmail} onChange={e => setForm({...form, fEmail: e.target.value})} className={error && !/.+@.+\..+/.test(form.fEmail) ? "border-destructive" : ""} />
+            </div>
+            <div className="flex gap-4">
+              <div className="w-1/3">
+                <Label className="text-xs tracking-wider uppercase text-muted-foreground font-semibold mb-1 block">ZIP</Label>
+                <Input placeholder="70801" value={form.fZip} onChange={e => setForm({...form, fZip: e.target.value})} className={error && form.fZip.replace(/\D/g,"").length < 5 ? "border-destructive" : ""} />
+              </div>
+              <div className="flex-1">
+                <Label className="text-xs tracking-wider uppercase text-muted-foreground font-semibold mb-1 block">Home sqft</Label>
+                <Input type="number" placeholder="e.g. 2000" value={form.fSqft} onChange={e => setForm({...form, fSqft: e.target.value})} className={error && sqftNum <= 0 ? "border-destructive" : ""} />
+              </div>
+            </div>
+            <div className="flex items-start space-x-3 pt-2">
+              <Checkbox id="quote-sms-consent" checked={smsConsent} onCheckedChange={(checked) => setSmsConsent(checked as boolean)} className="mt-1" />
+              <Label htmlFor="quote-sms-consent" className="text-[11px] leading-tight text-muted-foreground font-normal cursor-pointer">
+                I agree to receive recurring SMS marketing messages from The Construction Authority LLC at the phone number provided. Message frequency varies. Msg & data rates may apply. Consent is not a condition of purchase. Reply STOP to opt out, HELP for assistance. View our <Link to="/privacy-policy" className="text-primary hover:underline">Privacy Policy</Link>.
+              </Label>
+            </div>
+            <div>
+              <Label className="text-xs tracking-wider uppercase text-muted-foreground font-semibold mb-2 block">Current system</Label>
+              <div className="flex gap-2">
+                <Button variant={fuel === "Electric" ? "default" : "outline"} className="flex-1" onClick={() => setFuel("Electric")}>Electric</Button>
+                <Button variant={fuel === "Gas" ? "default" : "outline"} className="flex-1" onClick={() => setFuel("Gas")}>Gas</Button>
+              </div>
+            </div>
+            <div className="bg-secondary/50 border border-border rounded flex items-center gap-4 p-3">
+              <div className="font-heading text-3xl font-bold text-primary">{sqftNum > 0 ? recommendedSize : "—"}</div>
+              <div className="text-sm text-muted-foreground">
+                {sqftNum > 0 ? <><b>Recommended: {recommendedSize}-ton system</b><br/>~{sqftNum.toLocaleString()} sq ft ({fuel}).</> : "Enter your square footage to size your system."}
+              </div>
+            </div>
+            {error && <div className="text-destructive text-sm font-semibold">Please complete every field correctly to unlock pricing.</div>}
+            <Button className="w-full font-heading text-xl uppercase h-14 tracking-wider" onClick={handleNext}>Review My Info →</Button>
+          </div>
+        )}
+
+        {step === 2 && (
+          <div className="space-y-6">
+            <div className="bg-secondary/30 border border-border rounded-lg overflow-hidden">
+              {[
+                { k: "Name", v: form.fName },
+                { k: "Phone", v: form.fPhone },
+                { k: "Email", v: form.fEmail },
+                { k: "Home", v: `${sqftNum.toLocaleString()} sq ft · ${fuel}` },
+                { k: "System", v: `${recommendedSize}-ton system` }
+              ].map((row, i) => (
+                <div key={i} className="flex justify-between p-3 border-b border-border last:border-0">
+                  <span className="text-xs tracking-wider uppercase text-muted-foreground font-semibold">{row.k}</span>
+                  <span className="text-sm font-medium">{row.v}</span>
+                </div>
+              ))}
+            </div>
+            <div className="bg-primary/10 border border-primary/30 p-4 rounded-lg text-sm">
+              🔓 Confirm and your screen flips to <b>every system price with your monthly payment</b> — $500 discount locked in.
+            </div>
+            <div className="space-y-3">
+              <Button className="w-full font-heading text-xl uppercase h-14 tracking-wider" onClick={handleNext}>Confirm & Flip To My Prices →</Button>
+              <Button variant="ghost" className="w-full text-muted-foreground uppercase text-xs tracking-wider" onClick={() => setStep(1)}>← Edit my info</Button>
+            </div>
+          </div>
+        )}
+
+        {step === 3 && (
+          <div className="space-y-6">
+            <div className="flex border border-primary rounded overflow-hidden">
+              <button className={`flex-1 py-2 text-sm font-bold uppercase ${scope === "complete" ? "bg-primary text-primary-foreground" : "bg-secondary/50 text-muted-foreground"}`} onClick={() => handleScopeChange("complete")}>Complete System</button>
+              <button className={`flex-1 py-2 text-sm font-bold uppercase ${scope === "condenser" ? "bg-primary text-primary-foreground" : "bg-secondary/50 text-muted-foreground"}`} onClick={() => handleScopeChange("condenser")}>Outdoor Only</button>
+            </div>
+            <div className="space-y-2">
+              {Object.entries(BRANDS).map(([key, b]) => {
+                const p = priceFor(key);
+                const pm = monthlyPayment(p.discounted, currentApr, term);
+                const isTeam = window.location.pathname.includes('/tech') || window.location.pathname.includes('/admin');
+                return (
+                  <div key={key} onClick={() => setBrand(key)} className={`p-4 border rounded-lg cursor-pointer transition-all ${brand === key ? "border-primary shadow-lg bg-primary/5" : "border-border bg-secondary/20 hover:border-border/80"}`}>
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
+                      <div>
+                        <div className="font-heading text-xl font-bold uppercase">{b.label}</div>
+                        <div className="text-xs text-muted-foreground">{b.desc}</div>
+                        {isTeam && (
+                          <div className="mt-2 inline-block bg-primary/10 text-primary px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wider border border-primary/20">
+                            Tech Pay: {money(p.discounted * 0.25)}
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-left sm:text-right">
+                        <div className="font-heading text-2xl font-bold text-primary">{money(p.discounted)}</div>
+                        <div className="text-sm font-semibold text-primary mt-1">{pm ? `${money(pm)}/mo` : "—/mo"}</div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="bg-secondary/30 p-4 rounded-lg border border-border space-y-4">
+              {(window.location.pathname.includes('/tech') || window.location.pathname.includes('/admin')) && (
+                <div className="border-b border-border pb-4 mb-4 text-center">
+                  <Label className="text-xs tracking-[0.2em] uppercase text-primary font-bold mb-2 block">Tech Pay</Label>
+                  <div className="bg-primary/5 p-4 rounded-xl border border-primary/20 inline-block min-w-[200px]">
+                    <p className="text-3xl font-heading font-bold text-primary">{money(selectedPrice.discounted * 0.25)}</p>
+                  </div>
+                </div>
+              )}
+              <div>
+                <Label className="text-xs tracking-wider uppercase text-muted-foreground font-semibold mb-2 block">Your Credit</Label>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  {(Object.keys(CREDIT) as Array<keyof typeof CREDIT>).map(c => (
+                    <Button key={c} variant={credit === c ? "default" : "outline"} size="sm" className="w-full sm:flex-1 text-xs h-auto py-2 flex flex-col" onClick={() => setCredit(c)}>
+                      {CREDIT[c].label}
+                      <span className="text-[10px] opacity-70 font-normal">{CREDIT[c].range}</span>
+                    </Button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <Label className="text-xs tracking-wider uppercase text-muted-foreground font-semibold mb-2 block">Financing Term</Label>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  {[3, 5, 7].map(t => (
+                    <Button key={t} variant={term === t ? "default" : "outline"} size="sm" className="w-full sm:flex-1" onClick={() => setTerm(t as 3|5|7)}>{t} yrs</Button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="space-y-3">
+              <Button className="w-full font-heading text-xl uppercase h-14 tracking-wider" onClick={handleNext}>Ready To Get Started? →</Button>
+              <div className="flex gap-2">
+                <Button variant="ghost" className="flex-1 text-muted-foreground uppercase text-xs tracking-wider" onClick={() => setStep(2)}>← Back</Button>
+                <Button variant="ghost" className="flex-1 text-destructive uppercase text-xs tracking-wider font-bold" onClick={handleReset}>↺ New Quote</Button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {step === 4 && (
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold font-heading">1</div>
+                <div className="font-bold">Schedule your appointment</div>
+              </div>
+              <Dialog open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+                <DialogTrigger asChild><Button className="w-full font-heading text-lg h-12">Book</Button></DialogTrigger>
+                <DialogContent className="w-[95vw] sm:w-full max-w-4xl p-0 border-0 bg-transparent shadow-none max-h-[95vh] flex flex-col">
+                  <DialogTitle className="sr-only">Schedule Appointment</DialogTitle>
+                  <div id="CRM-calendar-container" className="w-full bg-card border border-border rounded-lg flex flex-col flex-1 overflow-hidden">
+                    <iframe 
+                      src={`https://api.leadconnectorhq.com/widget/bookings/new-installs-and-condenser-rep?first_name=${encodeURIComponent(form.fName.split(" ")[0] || "")}&last_name=${encodeURIComponent(form.fName.split(" ").slice(1).join(" ") || "")}&email=${encodeURIComponent(form.fEmail)}&phone=${encodeURIComponent(form.fPhone)}`} 
+                      style={{ width: "100%", border: "none", height: "80vh", minHeight: "600px" }} 
+                      scrolling="auto" 
+                      id="new-installs-and-condenser-rep_iframe"
+                    ></iframe>
+                    <div className="p-4 bg-card border-t border-border flex justify-end">
+                      <Button variant="default" onClick={() => { setBookingComplete(true); setIsCalendarOpen(false); }}>I've booked my appointment</Button>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+              {bookingComplete && (
+                <div className="mt-2 p-4 bg-primary/10 border border-primary/30 text-foreground rounded-lg text-center font-medium">
+                  🎉 Thank you! Your appointment has been successfully set. Please expect a Tech to Contact you shortly.
+                </div>
+              )}
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold font-heading">2</div>
+                <div className="font-bold">Complete financing application</div>
+              </div>
+              <Button asChild className="w-full font-heading text-lg h-12" variant="outline">
+                <a href="https://app.gethearth.com/partners/the-construction-authority/rodney/apply" target="_blank" rel="noopener noreferrer">✅ Complete Application</a>
+              </Button>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold font-heading">3</div>
+                <div className="font-bold">Request a Callback</div>
+              </div>
+              <Button className="w-full font-heading text-lg h-12 flex items-center justify-center bg-[#6699CC] hover:bg-[#5588BB] text-[#FFCC00] border border-[#6699CC]/50 shadow-[0_4px_0_0_#3d6b99] hover:shadow-[0_2px_0_0_#3d6b99] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] transition-all" variant="outline" onClick={() => onOpenCallback?.()}>
+                <Phone className="mr-2 h-5 w-5" /> Not Sure? Request a Callback
+              </Button>
+            </div>
+            <div className="flex gap-2">
+              <Button variant="ghost" className="flex-1 text-muted-foreground uppercase text-xs tracking-wider" onClick={() => setStep(3)}>← Back to my prices</Button>
+              <Button variant="ghost" className="flex-1 text-destructive uppercase text-xs tracking-wider font-bold" onClick={handleReset}>↺ New Quote</Button>
+            </div>
+          </div>
+        )}
+        </div>
+      </div>
+    </div>
+  );
+};
+src/components/CallbackWidget.tsx
+import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { CheckCircle2 } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Link } from "react-router-dom";
+
+type StandardTrackingFieldKey = string;
+type RegisteredCustomFieldId = string;
+type TrackingCustomField = { value?: unknown; label: string };
+type TrackingFileField = { file?: File; label: string };
+type TrackingImageDataField = { dataUrl?: string; label: string };
+
+const postTrackingEvent = (
+  trackingPayload: Record<string, unknown> & {
+    formData: Record<StandardTrackingFieldKey, unknown>;
+    formLabels: Record<StandardTrackingFieldKey, string>;
+  },
+  options: {
+    customFields?: Record<RegisteredCustomFieldId, TrackingCustomField>;
+    fileFields?: Record<RegisteredCustomFieldId, TrackingFileField>;
+    imageDataFields?: Record<RegisteredCustomFieldId, TrackingImageDataField>;
+  } = {},
+) => {
+  const { customFields = {}, fileFields = {}, imageDataFields = {} } = options;
+  const eventPayload = { ...trackingPayload, formData: { ...trackingPayload.formData }, formLabels: { ...trackingPayload.formLabels } };
+  const body = new FormData();
+  for (const [key, field] of Object.entries(customFields)) {
+    if (field.value === undefined) continue;
+    eventPayload.formData[key] = field.value;
+    eventPayload.formLabels[key] = field.label;
+  }
+  for (const [key, field] of Object.entries(imageDataFields)) {
+    const dataUrl = field.dataUrl;
+    if (!dataUrl) continue;
+    if (!dataUrl.startsWith("data:image/")) throw new Error("Image data field must be a data:image/* base64 string");
+    eventPayload.formData[key] = dataUrl;
+    eventPayload.formLabels[key] = field.label;
+  }
+  for (const [key, field] of Object.entries(fileFields)) {
+    const file = field.file;
+    if (!file) continue;
+    if (file.size > 50 * 1024 * 1024) throw new Error("File must be 50 MB or smaller");
+    eventPayload.formData[key] = { filename: file.name, size: file.size, type: file.type || "application/octet-stream" };
+    eventPayload.formLabels[key] = field.label;
+    body.append(key, file, file.name);
+  }
+  for (const key of Object.keys(eventPayload.formData)) { eventPayload.formLabels[key] ||= key; }
+  body.append("event", JSON.stringify(eventPayload));
+  fetch("https://backend.leadconnectorhq.com/external-tracking/events", {
+    method: "POST", headers: { version: "2021-07-28" }, body,
+  }).catch(() => {});
+};
+
+export function CallbackWidget({ isOpen, onOpenChange }: { isOpen: boolean; onOpenChange: (open: boolean) => void }) {
+  const [step, setStep] = useState(1);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [issue, setIssue] = useState("");
+  const [notes, setNotes] = useState("");
+  const [smsConsent, setSmsConsent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    const WEBHOOK_URL = ""; 
+    const payload = { event: "callback_requested", route_to_phone: "504-332-9801", name, phone, issue, notes, submitted_at: new Date().toISOString() };
+    if (WEBHOOK_URL) {
+      try { await fetch(WEBHOOK_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }); } catch (e) { console.error("Webhook failed", e); }
+    } else { console.log("Callback requested payload:", payload); }
+
+    const trackingPayload = {
+      type: "external_form_submission", timestamp: Date.now(), formId: "Callback Request Form",
+      formData: { first_name: name, phone: phone, message: notes },
+      formLabels: { first_name: "Full Name", phone: "Phone Number", message: "Additional Notes" },
+      url: window.location.href, title: document.title, path: window.location.pathname, userAgent: navigator.userAgent,
+      trackingId: "tk_7ff1b0689e60408f88a2d02eb3a7a53b", locationId: "9ULMhTLldtjgNRGX0xVP", sessionId: crypto.randomUUID(),
+      properties: { deviceType: /Mobile|Android|iPhone/i.test(navigator.userAgent) ? "mobile" : "desktop" },
+    };
+    postTrackingEvent(trackingPayload, { customFields: { "ccKgoA2NFhsm38oRgXxe": { value: issue, label: "Diagnostic Issue" } } });
+    setTimeout(() => { setIsSubmitting(false); setStep(3); }, 800);
+  };
+
+  const resetAndClose = () => {
+    onOpenChange(false);
+    setTimeout(() => { setStep(1); setName(""); setPhone(""); setIssue(""); setNotes(""); }, 300);
+  };
+
+  return (
+    <Dialog open={isOpen} onOpenChange={(open) => !open && resetAndClose()}>
+      <DialogContent className="w-[95vw] sm:max-w-[550px] bg-[#F7F3EB] border-[#E5DDD0]">
+        {step === 1 && (
+          <>
+            <DialogHeader>
+              <DialogTitle className="font-heading text-2xl uppercase tracking-wider text-[#1C242C]">Request a Callback</DialogTitle>
+              <DialogDescription className="text-[#57646F] text-base">Please provide your contact information so our team can reach out to you immediately.</DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4 py-4">
+              <div className="space-y-2">
+                <Label htmlFor="cb-name" className="text-xs uppercase tracking-widest text-[#6B7885] font-semibold">Full Name</Label>
+                <Input id="cb-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Jane Doe" className="bg-white border-[#D6CCBB] focus-visible:ring-primary h-12" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="cb-phone" className="text-xs uppercase tracking-widest text-[#6B7885] font-semibold">Phone Number</Label>
+                <Input id="cb-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(555) 123-4567" className="bg-white border-[#D6CCBB] focus-visible:ring-primary h-12" />
+              </div>
+              <div className="flex items-start space-x-3 pt-2">
+                <Checkbox id="cb-sms-consent" checked={smsConsent} onCheckedChange={(checked) => setSmsConsent(checked as boolean)} className="mt-1" />
+                <Label htmlFor="cb-sms-consent" className="text-[11px] leading-tight text-[#57646F] font-normal cursor-pointer">
+                  I agree to receive recurring SMS marketing messages from The Construction Authority LLC at the phone number provided. Message frequency varies. Msg & data rates may apply. Consent is not a condition of purchase. Reply STOP to opt out, HELP for assistance. View our <Link to="/privacy-policy" className="text-primary hover:underline">Privacy Policy</Link>.
+                </Label>
+              </div>
+            </div>
+            <div className="flex justify-end gap-3 mt-2">
+              <Button variant="ghost" onClick={resetAndClose} className="text-[#57646F]">Cancel</Button>
+              <Button onClick={() => setStep(2)} disabled={name.length < 2 || phone.length < 10} className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8">Next</Button>
+            </div>
+          </>
+        )}
+        {step === 2 && (
+          <>
+            <DialogHeader>
+              <DialogTitle className="font-heading text-2xl uppercase tracking-wider text-[#1C242C]">Diagnostic Details</DialogTitle>
+              <DialogDescription className="text-[#57646F] text-base">To help us assist you faster, please identify the primary issue you are experiencing:</DialogDescription>
+            </DialogHeader>
+            <div className="py-4">
+              <RadioGroup value={issue} onValueChange={setIssue} className="space-y-3">
+                <div className="flex items-center space-x-3 border border-[#D6CCBB] p-4 rounded-md bg-white hover:border-primary transition-colors cursor-pointer" onClick={() => setIssue("System is running but blowing warm air")}>
+                  <RadioGroupItem value="System is running but blowing warm air" id="r1" />
+                  <Label htmlFor="r1" className="cursor-pointer font-medium text-[#1C242C] text-sm sm:text-base leading-snug">System is running but blowing warm air</Label>
+                </div>
+                <div className="flex items-center space-x-3 border border-[#D6CCBB] p-4 rounded-md bg-white hover:border-primary transition-colors cursor-pointer" onClick={() => setIssue("Outdoor unit (condenser) is not turning on")}>
+                  <RadioGroupItem value="Outdoor unit (condenser) is not turning on" id="r2" />
+                  <Label htmlFor="r2" className="cursor-pointer font-medium text-[#1C242C] text-sm sm:text-base leading-snug">Outdoor unit (condenser) is not turning on</Label>
+                </div>
+                <div className="flex items-center space-x-3 border border-[#D6CCBB] p-4 rounded-md bg-white hover:border-primary transition-colors cursor-pointer" onClick={() => setIssue("Indoor unit (blower/furnace) is not operating")}>
+                  <RadioGroupItem value="Indoor unit (blower/furnace) is not operating" id="r3" />
+                  <Label htmlFor="r3" className="cursor-pointer font-medium text-[#1C242C] text-sm sm:text-base leading-snug">Indoor unit (blower/furnace) is not operating</Label>
+                </div>
+                <div className="flex items-center space-x-3 border border-[#D6CCBB] p-4 rounded-md bg-white hover:border-primary transition-colors cursor-pointer" onClick={() => setIssue("Entire system is completely unresponsive")}>
+                  <RadioGroupItem value="Entire system is completely unresponsive" id="r4" />
+                  <Label htmlFor="r4" className="cursor-pointer font-medium text-[#1C242C] text-sm sm:text-base leading-snug">Entire system is completely unresponsive</Label>
+                </div>
+              </RadioGroup>
+              <div className="space-y-2 mt-5">
+                <Label htmlFor="cb-notes" className="text-xs uppercase tracking-widest text-[#6B7885] font-semibold">Additional Notes (Optional)</Label>
+                <Textarea id="cb-notes" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Tell us more about the problem..." className="bg-white border-[#D6CCBB] focus-visible:ring-primary min-h-[80px]" />
+              </div>
+            </div>
+            <div className="flex justify-between mt-2">
+              <Button variant="ghost" onClick={() => setStep(1)} className="text-[#57646F]">Back</Button>
+              <Button onClick={handleSubmit} disabled={!issue || isSubmitting} className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8">{isSubmitting ? "Submitting..." : "Submit Request"}</Button>
+            </div>
+          </>
+        )}
+        {step === 3 && (
+          <div className="py-8 text-center flex flex-col items-center">
+            <CheckCircle2 className="w-16 h-16 text-green-600 mb-4" />
+            <h3 className="font-heading text-2xl font-bold text-[#1C242C] mb-2 uppercase">Request Received</h3>
+            <p className="text-[#57646F] mb-4 max-w-[320px]">Thank you! If you opted in to SMS, you'll receive a confirmation text shortly. Reply STOP at any time to unsubscribe.</p>
+            <div className="bg-secondary/30 p-4 rounded-lg mb-8 w-full max-w-[320px]">
+              <p className="font-semibold text-primary text-lg">Need immediate assistance?</p>
+              <p className="text-muted-foreground mt-1">Call us directly at:</p>
+              <a href="tel:15043329801" className="inline-block mt-2 font-heading text-2xl font-bold text-primary hover:text-primary/80 transition-colors">1-504-332-9801</a>
+            </div>
+            <Button onClick={resetAndClose} className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8">Close</Button>
+          </div>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+}
+src/components/EmergencyWidget.tsx
+import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { AlertCircle, Clock, CheckCircle2 } from "lucide-react";
+
+const TIERS = [
+  { id: "60min", name: "60 Minute Arrival", price: 375, desc: "Immediate dispatch", bgClass: "bg-red-50", borderClass: "border-red-500", hoverClass: "hover:border-red-300" },
+  { id: "3hr", name: "3 Hour Arrival", price: 275, desc: "Priority routing", bgClass: "bg-yellow-50", borderClass: "border-yellow-500", hoverClass: "hover:border-yellow-300" },
+];
+
+export function EmergencyWidget({ isOpen, onOpenChange }: { isOpen: boolean, onOpenChange: (open: boolean) => void }) {
+  const [step, setStep] = useState(1);
+  const [selectedTier, setSelectedTier] = useState<typeof TIERS[0] | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [eta, setEta] = useState<string>("");
+
+  const handleOpenChange = (open: boolean) => {
+    if (!open) { setTimeout(() => { setStep(1); setSelectedTier(null); setEta(""); }, 300); }
+    onOpenChange(open);
+  };
+
+  const calculateEta = (tierId: string) => {
+    const now = new Date();
+    if (tierId === "60min") { now.setMinutes(now.getMinutes() + 60); return now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) + ' (Today)'; }
+    else if (tierId === "3hr") { now.setHours(now.getHours() + 3); return now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) + ' (Today)'; }
+    else return "Before the end of Business Day";
+  };
+
+  const handlePayment = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => { setIsProcessing(false); if (selectedTier) { setEta(calculateEta(selectedTier.id)); } setStep(4); }, 1500);
+  };
+
+  return (
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
+      <DialogContent className="sm:max-w-[500px] w-[95vw] p-0 overflow-hidden bg-[#F7F3EB] border-[#E5DDD0] max-h-[90vh] flex flex-col rounded-lg">
+        <div className="bg-[#EFE9DF] border-b border-[#E5DDD0] p-4 sm:p-6 shrink-0">
+          <DialogTitle className="font-heading text-xl sm:text-2xl font-bold uppercase text-[#1C242C] flex items-center gap-2">
+            <AlertCircle className="text-[#E06C5A] shrink-0" /> Emergency HVAC Service Fee
+          </DialogTitle>
+        </div>
+        <div className="p-6 overflow-y-auto">
+          {step === 1 && (
+            <div className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
+              <div className="space-y-4 text-[#57646F]">
+                <h3 className="font-bold text-[#1C242C] text-lg">Disclaimer & Terms</h3>
+                <p><strong>What is an emergency?</strong> Complete system failure during extreme temperatures, active leaks causing damage, or electrical hazards related to your HVAC system.</p>
+                <p><strong>What we will do:</strong> Our team has a special on-call team that will dispatch directly to the appointment. We will dispatch a technician within the selected timeframe to locate the problem, diagnose the issue, and perform repairs if parts are available and safe to do so.</p>
+                <p><strong>What we will not do:</strong> We cannot guarantee same-day repair if specialized parts must be ordered or if conditions are unsafe for our technicians.</p>
+                <div className="bg-[#FBEDE9] border border-[#E06C5A] p-4 rounded text-[#1C242C] text-sm">By proceeding, you agree to the diagnostic fee associated with your chosen response time.</div>
+              </div>
+              <Button className="w-full bg-[#E06C5A] hover:bg-[#c95d4d] text-white font-bold text-lg h-14 uppercase tracking-wide" onClick={() => setStep(2)}>I Agree — Proceed</Button>
+            </div>
+          )}
+          {step === 2 && (
+            <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
+              <h3 className="font-bold text-[#1C242C] text-lg mb-4">Select Response Time</h3>
+              <div className="space-y-3">
+                {TIERS.map((tier) => (
+                  <div key={tier.id} className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${tier.bgClass} ${selectedTier?.id === tier.id ? tier.borderClass : `border-transparent ${tier.hoverClass}`}`} onClick={() => setSelectedTier(tier)}>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="font-bold text-[#1C242C] text-lg">{tier.name}</span>
+                      <span className="font-heading font-bold text-2xl text-[#23718A]">${tier.price}</span>
+                    </div>
+                    <div className="text-sm text-[#6B7885]">{tier.desc}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                <Button variant="outline" className="w-full sm:flex-1 border-[#D6CCBB] text-[#1C242C]" onClick={() => setStep(1)}>Back</Button>
+                <Button className="w-full sm:flex-[2] bg-[#23718A] hover:bg-[#1d5c70] text-white font-bold text-lg" disabled={!selectedTier} onClick={() => setStep(3)}>Continue to Payment</Button>
+              </div>
+            </div>
+          )}
+          {step === 3 && selectedTier && (
+            <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
+              <div className="bg-white p-4 border border-[#D6CCBB] rounded-lg mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div className="flex-1">
+                  <div className="font-bold text-[#1C242C] text-lg">{selectedTier.name}</div>
+                  <div className="text-sm text-[#6B7885] mt-2 leading-relaxed">
+                    I am swiping my card because someone will be here at:<br/>
+                    <span className="font-bold text-[#C57B3D] text-base">{calculateEta(selectedTier.id)}</span>
+                  </div>
+                </div>
+                <div className="font-heading font-bold text-3xl text-[#23718A] shrink-0">${selectedTier.price}</div>
+              </div>
+              <div className="space-y-4">
+                <div className="w-full bg-white rounded-md border border-[#E5DDD0] overflow-hidden relative" style={{ height: '600px' }}>
+                  {selectedTier.id === "60min" ? (
+                    <iframe src="https://link.fastpaydirect.com/payment-link/6a54563dc981f3feae6e8b5b" className="w-full h-full border-0 relative z-10" />
+                  ) : selectedTier.id === "3hr" ? (
+                    <iframe src="https://link.fastpaydirect.com/payment-link/6a545f95c981f3feae6e8b61" className="w-full h-full border-0 relative z-10" />
+                  ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-gray-50">
+                      <svg className="w-12 h-12 text-[#6B7885] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                      <p className="font-bold text-[#1C242C] mb-2 text-lg">Secure Payment Portal</p>
+                      <p className="text-sm text-[#6B7885] max-w-xs">Provide your payment link for this tier to embed it directly here.</p>
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                  <Button type="button" variant="outline" className="w-full sm:flex-1 border-[#D6CCBB] text-[#1C242C]" onClick={() => setStep(2)}>Back</Button>
+                  <Button type="button" className="w-full sm:flex-[2] bg-[#C57B3D] hover:bg-[#d98f52] text-[#0C141B] font-bold text-lg" onClick={handlePayment} disabled={isProcessing}>
+                    {isProcessing ? "Processing..." : `I have completed my payment`}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+          {step === 4 && (
+            <div className="py-8 text-center space-y-6 animate-in zoom-in-95 duration-500">
+              <div className="w-16 h-16 bg-[#23718A] text-white rounded-full flex items-center justify-center mx-auto mb-4"><CheckCircle2 size={32} /></div>
+              <h3 className="font-heading font-bold text-3xl text-[#1C242C] uppercase">Thank you for your payment</h3>
+              <p className="text-lg text-[#57646F]">A tech will be contacting you immediately.</p>
+              <div className="bg-white border border-[#C57B3D] rounded-lg p-6 mt-6 inline-block text-left">
+                <div className="text-sm font-bold text-[#C57B3D] tracking-widest uppercase mb-2 flex items-center gap-2"><Clock size={16} /> Official Time of Arrival</div>
+                <div className="font-heading font-bold text-2xl text-[#1C242C]">{eta}</div>
+              </div>
+              <div className="pt-6"><Button variant="outline" className="border-[#D6CCBB] text-[#1C242C]" onClick={() => handleOpenChange(false)}>Close Window</Button></div>
+            </div>
+          )}
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+src/components/JobCloseoutForm.tsx
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Camera } from "lucide-react";
+import { toast } from "sonner";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+export const JobCloseoutForm = ({ onComplete }: { onComplete: () => void }) => {
+  const [step, setStep] = useState(1);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (step < 4) { setStep(step + 1); }
+    else { toast.success("Job closeout submitted successfully! Payment processing initiated."); onComplete(); }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-xl font-heading font-bold uppercase tracking-wider text-primary">Job Closeout & Payment Verification</h3>
+        <span className="text-sm font-bold text-muted-foreground bg-muted px-3 py-1 rounded-full">Step {step} of 4</span>
+      </div>
+      <ScrollArea className="h-[60vh] pr-4">
+      {step === 1 && (
+        <div className="space-y-6">
+          <h4 className="font-bold text-foreground border-b border-border pb-2 uppercase tracking-widest text-sm">1. Job & Customer Info</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="space-y-2"><Label className="font-bold">Subcontractor Name</Label><Input required placeholder="Your name" className="bg-muted/50" /></div>
+            <div className="space-y-2"><Label className="font-bold">Email</Label><Input type="email" required placeholder="your@email.com" className="bg-muted/50" /></div>
+            <div className="space-y-2"><Label className="font-bold">Customer Name</Label><Input required placeholder="Customer name" className="bg-muted/50" /></div>
+            <div className="space-y-2"><Label className="font-bold">Customer Phone</Label><Input required placeholder="Phone number" className="bg-muted/50" /></div>
+            <div className="space-y-2 md:col-span-2"><Label className="font-bold">Job Address</Label><Input required placeholder="Full address" className="bg-muted/50" /></div>
+            <div className="space-y-2"><Label className="font-bold">Date & Time Completed</Label><Input type="datetime-local" required className="bg-muted/50" /></div>
+            <div className="space-y-2"><Label className="font-bold">Invoice Number</Label><Input required placeholder="INV-0000" className="bg-muted/50" /></div>
+          </div>
+        </div>
+      )}
+      {step === 2 && (
+        <div className="space-y-6">
+          <h4 className="font-bold text-foreground border-b border-border pb-2 uppercase tracking-widest text-sm">2. Equipment Details</h4>
+          <div className="space-y-5">
+            <div className="space-y-2">
+              <Label className="font-bold">Unit Installed</Label>
+              <Select required>
+                <SelectTrigger className="bg-muted/50"><SelectValue placeholder="Select unit type" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="oxbox">Oxbox</SelectItem>
+                  <SelectItem value="rheem">Rheem</SelectItem>
+                  <SelectItem value="goodman">Goodman</SelectItem>
+                  <SelectItem value="lennox">Lennox</SelectItem>
+                  <SelectItem value="american-standard">American Standard</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="space-y-2"><Label className="font-bold">Condenser Model Number</Label><Input required className="bg-muted/50" /></div>
+              <div className="space-y-2"><Label className="font-bold">Air Handler/Furnace Model Number</Label><Input required className="bg-muted/50" /></div>
+              <div className="space-y-2"><Label className="font-bold">Equipment Serial Numbers</Label><Input required className="bg-muted/50" /></div>
+              <div className="space-y-2"><Label className="font-bold">Filter Size Installed</Label><Input required placeholder="e.g. 20x20x1" className="bg-muted/50" /></div>
+              <div className="space-y-2"><Label className="font-bold">Breaker Size</Label><Input required placeholder="e.g. 30A" className="bg-muted/50" /></div>
+            </div>
+          </div>
+        </div>
+      )}
+      {step === 3 && (
+        <div className="space-y-6">
+          <h4 className="font-bold text-foreground border-b border-border pb-2 uppercase tracking-widest text-sm">3. Commissioning & Readings</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+            <div className="space-y-2"><Label className="font-bold">Vacuum Reading (microns before charging)</Label><Input required className="bg-muted/50" /></div>
+            <div className="space-y-2"><Label className="font-bold">Refrigerant Charge (subcooling/superheat)</Label><Input required className="bg-muted/50" /></div>
+            <div className="space-y-2"><Label className="font-bold">Static Pressure Readings</Label><Input required className="bg-muted/50" /></div>
+            <div className="space-y-2"><Label className="font-bold">Supply and Return Air Temperatures</Label><Input required className="bg-muted/50" /></div>
+          </div>
+          <h5 className="font-bold text-sm text-primary uppercase tracking-widest mb-3">Commissioning Checklist</h5>
+          <div className="space-y-4 bg-muted/20 p-5 rounded-lg border border-border/50">
+            {["Condensate drain tested","Float switch tested","Thermostat calibrated","Heat mode tested (if applicable)","Cooling mode tested","Refrigerant charge verified","Airflow verified"].map((item, i) => (
+              <div key={i} className="flex items-center space-x-3">
+                <Checkbox id={`check-${i}`} required className="h-5 w-5" />
+                <Label htmlFor={`check-${i}`} className="text-sm font-semibold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">{item}</Label>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {step === 4 && (
+        <div className="space-y-6">
+          <h4 className="font-bold text-foreground border-b border-border pb-2 uppercase tracking-widest text-sm">4. Required Photo Documentation</h4>
+          <p className="text-sm text-muted-foreground mb-4">Upload one clear photo for each requirement below to verify completion and process payment.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {["Outdoor unit with a level","Gauges while the unit is running","Suction line insulated","Indoor unit","Drain line insulated","Pan switches","Indoor unit with a level","Thermostat Photo","Electrical Disconnect Photo","Nameplate Photo (indoor and outdoor)"].map((photo, i) => (
+              <div key={i} className="flex items-center justify-between p-3 border border-border/50 rounded-lg bg-card hover:border-primary/50 transition-colors">
+                <span className="text-sm font-semibold truncate pr-2">{photo}</span>
+                <Button type="button" variant="outline" size="sm" className="shrink-0 bg-primary/5 hover:bg-primary/10 text-primary border-primary/20"><Camera size={14} className="mr-2" /> Upload</Button>
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8">
+            <div className="space-y-2 border border-border/50 p-4 rounded-lg bg-muted/10">
+              <Label className="font-bold text-primary uppercase tracking-wider text-xs">Customer Signature</Label>
+              <div className="h-24 bg-background border border-dashed border-muted-foreground/30 rounded flex items-center justify-center text-muted-foreground text-sm font-medium cursor-pointer hover:bg-muted/50 transition-colors">Tap to sign</div>
+            </div>
+            <div className="space-y-2 border border-border/50 p-4 rounded-lg bg-muted/10">
+              <Label className="font-bold text-primary uppercase tracking-wider text-xs">Technician Signature</Label>
+              <div className="h-24 bg-background border border-dashed border-muted-foreground/30 rounded flex items-center justify-center text-muted-foreground text-sm font-medium cursor-pointer hover:bg-muted/50 transition-colors">Tap to sign</div>
+            </div>
+          </div>
+        </div>
+      )}
+      </ScrollArea>
+      <div className="flex justify-between pt-6 border-t border-border mt-6">
+        <Button type="button" variant="outline" onClick={() => setStep(step - 1)} disabled={step === 1} className="font-bold">Previous</Button>
+        <Button type="submit" className="bg-[#C57B3D] hover:bg-[#d98f52] text-[#0C141B] font-bold shadow-[0_4px_0_0_#9c6130] hover:translate-y-[2px] active:shadow-none active:translate-y-[4px] transition-all px-8">
+          {step < 4 ? "Next Step" : "Submit Closeout & Invoice"}
+        </Button>
+      </div>
+    </form>
+  );
+};
+src/components/Hero3D.tsx
+// @ts-nocheck
+import { useEffect, useRef } from 'react';
+import * as THREE from 'three';
+
+export function Hero3D() {
+  const mountRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mount = mountRef.current;
+    if (!mount || mount.childElementCount > 0) return;
+
+    let reqId;
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0xf2eee6, 9, 20);
+
+    var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+    camera.position.set(4.6, 2.7, 5.6);
+    camera.lookAt(0, 1.1, 0);
+    scene.position.x = -0.8;
+
+    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    mount.appendChild(renderer.domElement);
+
+    scene.add(new THREE.AmbientLight(0x8899aa, 0.55));
+    var key = new THREE.DirectionalLight(0xffd9b0, 1.05);
+    key.position.set(6, 8, 4);
+    scene.add(key);
+    var rim = new THREE.DirectionalLight(0xbfe3ee, 0.85);
+    rim.position.set(-6, 3, -5);
+    scene.add(rim);
+    var fill = new THREE.PointLight(0xc57b3d, 0.5, 12);
+    fill.position.set(-2.5, 0.6, 3);
+    scene.add(fill);
+
+    var matCabinet = new THREE.MeshStandardMaterial({ color: 0x2a343e, metalness: 0.75, roughness: 0.35 });
+    var matSlat = new THREE.MeshStandardMaterial({ color: 0x38434f, metalness: 0.8, roughness: 0.3 });
+    var matDark = new THREE.MeshStandardMaterial({ color: 0x11181f, metalness: 0.6, roughness: 0.5 });
+    var matCopper = new THREE.MeshStandardMaterial({ color: 0xc57b3d, metalness: 0.95, roughness: 0.25 });
+    var matBlade = new THREE.MeshStandardMaterial({ color: 0x9aa7b2, metalness: 0.85, roughness: 0.3, side: THREE.DoubleSide });
+    var matGrille = new THREE.MeshStandardMaterial({ color: 0x556270, metalness: 0.9, roughness: 0.35 });
+    var matPad = new THREE.MeshStandardMaterial({ color: 0x161e26, metalness: 0.2, roughness: 0.9 });
+
+    var unit = new THREE.Group();
+    scene.add(unit);
+    var cond = new THREE.Group();
+    unit.add(cond);
+    var ahu = new THREE.Group();
+    ahu.visible = false;
+    ahu.rotation.y = Math.PI / 2;
+    unit.add(ahu);
+
+    var condLamp = new THREE.PointLight(0xfff2dd, 1.1, 4.5);
+    condLamp.position.set(0.4, 1.4, 0.1);
+    cond.add(condLamp);
+    var ahuLamp = new THREE.PointLight(0xfff2dd, 1.1, 4.5);
+    ahuLamp.position.set(0.1, 1.4, 0.5);
+    ahu.add(ahuLamp);
+
+    var pad = new THREE.Mesh(new THREE.BoxGeometry(3.4, 0.18, 3.4), matPad);
+    pad.position.y = 0.09;
+    cond.add(pad);
+
+    var H = 2.3, W = 2.05;
+    var IW = W - 0.14, wallT = 0.05;
+    var mkWall = function(w, h, d, x, y, z){ var m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), matDark); m.position.set(x, y, z); cond.add(m); return m; };
+    mkWall(IW, H, wallT, 0, 0.18 + H / 2, -IW / 2);
+    mkWall(IW, H, wallT, 0, 0.18 + H / 2, IW / 2);
+    mkWall(wallT, H, IW, -IW / 2, 0.18 + H / 2, 0);
+    var floorPan = new THREE.Mesh(new THREE.BoxGeometry(IW, 0.04, IW), matDark);
+    floorPan.position.y = 0.2;
+    cond.add(floorPan);
+
+    var postGeo = new THREE.BoxGeometry(0.16, H, 0.16);
+    [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(function(xz){ var p = new THREE.Mesh(postGeo, matCabinet); p.position.set((xz[0] * W) / 2, 0.18 + H / 2, (xz[1] * W) / 2); cond.add(p); });
+
+    var slatGeo = new THREE.BoxGeometry(W - 0.28, 0.055, 0.03);
+    var slatCount = 14;
+    for (var side = 0; side < 4; side++) {
+      if (side === 2) continue;
+      for (var i = 0; i < slatCount; i++) {
+        var s = new THREE.Mesh(slatGeo, matSlat);
+        var y = 0.42 + (i * (H - 0.55)) / (slatCount - 1);
+        var off = W / 2 + 0.015;
+        if (side === 0) s.position.set(0, y, off);
+        if (side === 1) { s.position.set(0, y, -off); }
+        if (side === 3) { s.position.set(-off, y, 0); s.rotation.y = Math.PI / 2; }
+        s.rotation.x += 0.28;
+        cond.add(s);
+      }
+    }
+
+    var lid = new THREE.Mesh(new THREE.BoxGeometry(W + 0.12, 0.1, W + 0.12), matCabinet);
+    lid.position.y = 0.18 + H + 0.05;
+    cond.add(lid);
+    var throat = new THREE.Mesh(new THREE.CylinderGeometry(0.78, 0.78, 0.14, 40), matDark);
+    throat.position.y = 0.18 + H + 0.12;
+    cond.add(throat);
+
+    var grille = new THREE.Group();
+    grille.position.y = 0.18 + H + 0.2;
+    [0.22, 0.42, 0.62, 0.78].forEach(function(r){ var ring = new THREE.Mesh(new THREE.TorusGeometry(r, 0.014, 8, 48), matGrille); ring.rotation.x = Math.PI / 2; grille.add(ring); });
+    for (var gi = 0; gi < 6; gi++) { var spoke = new THREE.Mesh(new THREE.BoxGeometry(1.56, 0.02, 0.03), matGrille); spoke.rotation.y = (gi * Math.PI) / 6; grille.add(spoke); }
+    cond.add(grille);
+
+    var fan = new THREE.Group();
+    fan.position.y = 0.18 + H + 0.06;
+    var hub = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.12, 20), matDark);
+    fan.add(hub);
+    for (var fi2 = 0; fi2 < 4; fi2++) { var blade = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.02, 0.24), matBlade); var holder = new THREE.Group(); blade.position.x = 0.42; blade.rotation.x = 0.5; holder.add(blade); holder.rotation.y = (fi2 * Math.PI) / 2; fan.add(holder); }
+    cond.add(fan);
+
+    var drop = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.0, 16), matCopper);
+    drop.position.set(W / 2 + 0.1, 0.85, 0.55);
+    cond.add(drop);
+    var elbow = new THREE.Mesh(new THREE.TorusGeometry(0.12, 0.05, 12, 24, Math.PI / 2), matCopper);
+    elbow.position.set(W / 2 + 0.22, 0.36, 0.55);
+    elbow.rotation.z = Math.PI;
+    cond.add(elbow);
+    var run = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.3, 16), matCopper);
+    run.rotation.z = Math.PI / 2;
+    run.position.set(W / 2 + 0.87, 0.24, 0.55);
+    cond.add(run);
+    var drop2 = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 1.0, 12), matCopper);
+    drop2.position.set(W / 2 + 0.1, 0.85, 0.32);
+    cond.add(drop2);
+    var run2 = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 1.42, 12), matCopper);
+    run2.rotation.z = Math.PI / 2;
+    run2.position.set(W / 2 + 0.81, 0.35, 0.32);
+    cond.add(run2);
+
+    var disc = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.46, 0.12), matCabinet);
+    disc.position.set(-W / 2 - 0.07, 1.5, -0.4);
+    disc.rotation.y = Math.PI / 2;
+    cond.add(disc);
+
+    var matBlack = new THREE.MeshStandardMaterial({ color: 0x1a1d21, metalness: 0.5, roughness: 0.45 });
+    var matSilver = new THREE.MeshStandardMaterial({ color: 0xc9d2d8, metalness: 0.9, roughness: 0.25 });
+    var matBoard = new THREE.MeshStandardMaterial({ color: 0x1f6e43, metalness: 0.2, roughness: 0.6 });
+    var matWireBk = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.7 });
+    var matWireRd = new THREE.MeshStandardMaterial({ color: 0xb3282d, roughness: 0.7 });
+    var matWireYl = new THREE.MeshStandardMaterial({ color: 0xd9a821, roughness: 0.7 });
+    var matWireBl = new THREE.MeshStandardMaterial({ color: 0x2a6fdb, roughness: 0.7 });
+
+    var compBody = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.32, 0.52, 24), matBlack);
+    compBody.position.set(0.18, 0.48, -0.28);
+    cond.add(compBody);
+    var compDome = new THREE.Mesh(new THREE.SphereGeometry(0.3, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2), matBlack);
+    compDome.position.set(0.18, 0.74, -0.28);
+    cond.add(compDome);
+
+    var fanMotor = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.13, 0.34, 18), matSilver);
+    fanMotor.position.set(0, 0.18 + H - 0.28, 0);
+    cond.add(fanMotor);
+    var motorShaft = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.22, 10), matGrille);
+    motorShaft.position.set(0, 0.18 + H - 0.06, 0);
+    cond.add(motorShaft);
+
+    var contactor = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.24, 0.16), matBlack);
+    contactor.position.set(0.62, 1.62, 0.72);
+    cond.add(contactor);
+    var capacitor = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.3, 18), matSilver);
+    capacitor.position.set(0.62, 1.6, 0.44);
+    cond.add(capacitor);
+
+    var board = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.4, 0.3), matBoard);
+    board.position.set(-0.82, 1.55, 0.1);
+    cond.add(board);
+    for (var bi = 0; bi < 3; bi++) { var chip = new THREE.Mesh(new THREE.BoxGeometry(0.025, 0.07, 0.06), matBlack); chip.position.set(-0.79, 1.44 + bi * 0.12, 0.1); cond.add(chip); }
+
+    var wire = function(mat, rad, from, to){ var dx = to[0] - from[0], dy = to[1] - from[1], dz = to[2] - from[2]; var len = Math.sqrt(dx * dx + dy * dy + dz * dz); var w = new THREE.Mesh(new THREE.CylinderGeometry(rad, rad, len, 8), mat); w.position.set((from[0] + to[0]) / 2, (from[1] + to[1]) / 2, (from[2] + to[2]) / 2); w.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), new THREE.Vector3(dx / len, dy / len, dz / len)); cond.add(w); return w; };
+    wire(matWireBk, 0.022, [0.62, 1.74, 0.72], [0.62, 2.1, 0.4]);
+    wire(matWireRd, 0.022, [0.66, 1.74, 0.7], [0.66, 2.08, 0.36]);
+    wire(matWireBk, 0.022, [0.62, 1.5, 0.72], [0.26, 0.86, -0.16]);
+    wire(matWireRd, 0.022, [0.58, 1.5, 0.68], [0.2, 0.88, -0.2]);
+    wire(matWireYl, 0.012, [-0.79, 1.62, 0.2], [0.55, 1.66, 0.66]);
+    wire(matWireBl, 0.012, [-0.79, 1.56, 0.24], [0.55, 1.58, 0.66]);
+
+    var P = 260;
+    var positions = new Float32Array(P * 3);
+    var speeds = new Float32Array(P);
+    for (var pi = 0; pi < P; pi++) { var r = Math.random() * 0.7; var a = Math.random() * Math.PI * 2; positions[pi * 3] = Math.cos(a) * r; positions[pi * 3 + 1] = 2.6 + Math.random() * 2.2; positions[pi * 3 + 2] = Math.sin(a) * r; speeds[pi] = 0.004 + Math.random() * 0.01; }
+    var pGeo = new THREE.BufferGeometry();
+    pGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    var pMat = new THREE.PointsMaterial({ color: 0x23718a, size: 0.045, transparent: true, opacity: 0.85 });
+    var plume = new THREE.Points(pGeo, pMat);
+    cond.add(plume);
+
+    var matSheet = new THREE.MeshStandardMaterial({ color: 0xb8c2cb, metalness: 0.65, roughness: 0.35 });
+    var matSheetDark = new THREE.MeshStandardMaterial({ color: 0x8a97a2, metalness: 0.7, roughness: 0.4 });
+    var matPVC = new THREE.MeshStandardMaterial({ color: 0xf2f4f5, metalness: 0.05, roughness: 0.45 });
+
+    var AH = 2.4, AW = 1.35, AD = 1.35;
+    var stand = new THREE.Mesh(new THREE.BoxGeometry(AW + 0.2, 0.22, AD + 0.2), matPad);
+    stand.position.y = 0.11;
+    ahu.add(stand);
+
+    var shT = 0.05;
+    var mkAhWall = function(w, h, d, x, y, z, mat){ var m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat || matSheet); m.position.set(x, y, z); ahu.add(m); return m; };
+    mkAhWall(AW, AH, shT, 0, 0.22 + AH / 2, -AD / 2);
+    mkAhWall(shT, AH, AD, -AW / 2, 0.22 + AH / 2, 0);
+    mkAhWall(shT, AH, AD, AW / 2, 0.22 + AH / 2, 0);
+    mkAhWall(AW, shT, AD, 0, 0.22 + AH - 0.025, 0, matSheetDark);
+    var matDarkIn = new THREE.MeshStandardMaterial({ color: 0x11181f, metalness: 0.4, roughness: 0.6 });
+    var backLiner = new THREE.Mesh(new THREE.BoxGeometry(AW - 0.1, AH - 0.1, 0.02), matDarkIn);
+    backLiner.position.set(0, 0.22 + AH / 2, -AD / 2 + 0.05);
+    ahu.add(backLiner);
+    mkAhWall(0.12, AH, shT, -AW / 2 + 0.06, 0.22 + AH / 2, AD / 2);
+    mkAhWall(0.12, AH, shT, AW / 2 - 0.06, 0.22 + AH / 2, AD / 2);
+
+    var matAhBlack = new THREE.MeshStandardMaterial({ color: 0x1a1d21, metalness: 0.5, roughness: 0.45 });
+    var matAhSilver = new THREE.MeshStandardMaterial({ color: 0xc9d2d8, metalness: 0.9, roughness: 0.25 });
+    var matFins = new THREE.MeshStandardMaterial({ color: 0x9fb4bd, metalness: 0.85, roughness: 0.4 });
+    var matHeatEl = new THREE.MeshStandardMaterial({ color: 0xd96a2a, emissive: 0xa33d0a, emissiveIntensity: 0.35, roughness: 0.4 });
+    var matWireBk2 = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.7 });
+    var matWireRd2 = new THREE.MeshStandardMaterial({ color: 0xb3282d, roughness: 0.7 });
+    var matWireYl2 = new THREE.MeshStandardMaterial({ color: 0xd9a821, roughness: 0.7 });
+
+    var heatFrame = new THREE.Mesh(new THREE.BoxGeometry(AW - 0.25, 0.34, AD - 0.4), matAhBlack);
+    heatFrame.position.set(0, 2.3, -0.08);
+    ahu.add(heatFrame);
+    for (var hi = 0; hi < 2; hi++) { var elCoil = new THREE.Mesh(new THREE.CylinderGeometry(0.024, 0.024, AW - 0.35, 8), matHeatEl); elCoil.rotation.z = Math.PI / 2; elCoil.position.set(0, 2.22 + hi * 0.16, 0.28); ahu.add(elCoil); }
+    var brkPanel = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.3, 0.2), matAhBlack);
+    brkPanel.position.set(AW / 2 - 0.08, 2.3, 0.42);
+    ahu.add(brkPanel);
+    var brkSwitch = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.12, 0.05), matAhSilver);
+    brkSwitch.position.set(AW / 2 - 0.09, 2.3, 0.42);
+    ahu.add(brkSwitch);
+
+    var cage = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.8, 24), matAhSilver);
+    cage.rotation.z = Math.PI / 2;
+    cage.position.set(0, 1.62, -0.05);
+    ahu.add(cage);
+    var cageBand = new THREE.Mesh(new THREE.TorusGeometry(0.42, 0.02, 8, 32), matAhBlack);
+    cageBand.rotation.y = Math.PI / 2;
+    cageBand.position.set(0, 1.62, -0.05);
+    ahu.add(cageBand);
+    var blowerCap = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, 0.16, 14), matAhSilver);
+    blowerCap.position.set(0, 1.62, 0.38);
+    blowerCap.rotation.x = Math.PI / 2;
+    ahu.add(blowerCap);
+    var capBand = new THREE.Mesh(new THREE.TorusGeometry(0.055, 0.012, 8, 18), matAhBlack);
+    capBand.position.set(0, 1.62, 0.38);
+    ahu.add(capBand);
+
+    var coilGeoA = new THREE.BoxGeometry(AW - 0.3, 0.62, 0.07);
+    var coilL = new THREE.Mesh(coilGeoA, matFins);
+    coilL.position.set(0, 0.92, -0.22);
+    coilL.rotation.x = 0.42;
+    ahu.add(coilL);
+    var coilR = new THREE.Mesh(coilGeoA, matFins);
+    coilR.position.set(0, 0.92, 0.22);
+    coilR.rotation.x = -0.42;
+    ahu.add(coilR);
+    for (var fj = -2; fj <= 2; fj++) { var finL = new THREE.Mesh(new THREE.BoxGeometry(0.015, 0.6, 0.085), matAhSilver); finL.position.set(fj * 0.2, 0.92, -0.22); finL.rotation.x = 0.42; ahu.add(finL); var finR = new THREE.Mesh(new THREE.BoxGeometry(0.015, 0.6, 0.085), matAhSilver); finR.position.set(fj * 0.2, 0.92, 0.22); finR.rotation.x = -0.42; ahu.add(finR); }
+    var coilTube = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 1.6, 12), matCopper);
+    coilTube.position.set(0.35, 1.9, -0.3);
+    ahu.add(coilTube);
+    var coilTube2 = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 1.8, 10), matCopper);
+    coilTube2.position.set(0.45, 2.0, -0.2);
+    ahu.add(coilTube2);
+
+    var returnFrame = new THREE.Mesh(new THREE.BoxGeometry(AW - 0.2, 0.06, AD - 0.2), matAhBlack);
+    returnFrame.position.set(0, 0.52, 0);
+    ahu.add(returnFrame);
+    for (var ri = -2; ri <= 2; ri++) { var rBar = new THREE.Mesh(new THREE.BoxGeometry(AW - 0.3, 0.03, 0.05), matAhSilver); rBar.position.set(0, 0.4, ri * 0.22); ahu.add(rBar); }
+
+    var ahWire = function(mat, rad, from, to){ var dx = to[0] - from[0], dy = to[1] - from[1], dz = to[2] - from[2]; var len = Math.sqrt(dx * dx + dy * dy + dz * dz); var w = new THREE.Mesh(new THREE.CylinderGeometry(rad, rad, len, 8), mat); w.position.set((from[0] + to[0]) / 2, (from[1] + to[1]) / 2, (from[2] + to[2]) / 2); w.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), new THREE.Vector3(dx / len, dy / len, dz / len)); ahu.add(w); return w; };
+    ahWire(matWireBk2, 0.02, [AW / 2 - 0.1, 2.18, 0.42], [0.25, 2.28, 0.2]);
+    ahWire(matWireRd2, 0.02, [AW / 2 - 0.12, 2.2, 0.38], [0.2, 2.32, 0.16]);
+    ahWire(matWireBk2, 0.02, [0.2, 2.14, 0.2], [0.15, 1.7, 0.3]);
+    ahWire(matWireYl2, 0.012, [AW / 2 - 0.1, 2.44, 0.42], [0.1, 1.66, 0.36]);
+
+    var plenum = new THREE.Mesh(new THREE.BoxGeometry(AW - 0.25, 2.6, AD - 0.25), matSheetDark);
+    plenum.position.y = 0.22 + AH + 1.3;
+    ahu.add(plenum);
+    var collar = new THREE.Mesh(new THREE.BoxGeometry(AW - 0.15, 0.08, AD - 0.15), matDark);
+    collar.position.y = 0.22 + AH + 0.04;
+    ahu.add(collar);
+    [1.0, 1.9].forEach(function(py){ var pSeam = new THREE.Mesh(new THREE.BoxGeometry(AW - 0.23, 0.025, AD - 0.23), matDark); pSeam.position.y = 0.22 + AH + py; ahu.add(pSeam); });
+
+    var tWall = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.7, 0.05), new THREE.MeshStandardMaterial({ color: 0x3a4550, roughness: 0.9 }));
+    tWall.position.set(-AW / 2 - 0.65, 1.5, 0);
+    tWall.rotation.y = Math.PI / 2;
+    ahu.add(tWall);
+    var tRing = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.13, 0.05, 28), matAhSilver);
+    tRing.rotation.z = Math.PI / 2;
+    tRing.position.set(-AW / 2 - 0.6, 1.5, 0);
+    ahu.add(tRing);
+    var tFace = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.055, 28), matAhBlack);
+    tFace.rotation.z = Math.PI / 2;
+    tFace.position.set(-AW / 2 - 0.595, 1.5, 0);
+    ahu.add(tFace);
+    var tDot = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.058, 16), new THREE.MeshStandardMaterial({ color: 0xbfe3ee, emissive: 0x6fb5c8, emissiveIntensity: 0.6 }));
+    tDot.rotation.z = Math.PI / 2;
+    tDot.position.set(-AW / 2 - 0.59, 1.5, 0);
+    ahu.add(tDot);
+
+    var ahSuct = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.1, 16), matCopper);
+    ahSuct.rotation.x = Math.PI / 2;
+    ahSuct.position.set(0.35, 1.05, AD / 2 + 0.55);
+    ahu.add(ahSuct);
+    var ahLiq = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 1.2, 12), matCopper);
+    ahLiq.rotation.x = Math.PI / 2;
+    ahLiq.position.set(0.5, 0.88, AD / 2 + 0.6);
+    ahu.add(ahLiq);
+
+    var pvcGroup = new THREE.Group();
+    pvcGroup.rotation.y = -Math.PI / 2;
+    pvcGroup.position.x = -0.7;
+    ahu.add(pvcGroup);
+    var pvcStub = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.35, 14), matPVC);
+    pvcStub.rotation.z = Math.PI / 2;
+    pvcStub.position.set(0.775, 0.75, -0.35);
+    pvcGroup.add(pvcStub);
+    var pvcE1 = new THREE.Mesh(new THREE.TorusGeometry(0.09, 0.045, 10, 20, Math.PI / 2), matPVC);
+    pvcE1.position.set(0.95, 0.66, -0.35);
+    pvcGroup.add(pvcE1);
+    var pvcDrop = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.3, 14), matPVC);
+    pvcDrop.position.set(1.04, 0.51, -0.35);
+    pvcGroup.add(pvcDrop);
+    var pvcE2 = new THREE.Mesh(new THREE.TorusGeometry(0.12, 0.045, 10, 20, Math.PI / 2), matPVC);
+    pvcE2.position.set(1.16, 0.36, -0.35);
+    pvcE2.rotation.z = Math.PI;
+    pvcGroup.add(pvcE2);
+    var pvcRun = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 1.1, 14), matPVC);
+    pvcRun.rotation.z = Math.PI / 2;
+    pvcRun.position.set(1.71, 0.24, -0.35);
+    pvcGroup.add(pvcRun);
+
+    var ground = new THREE.Mesh(new THREE.CircleGeometry(9, 48), new THREE.MeshStandardMaterial({ color: 0xe6dfd2, roughness: 1 }));
+    ground.rotation.x = -Math.PI / 2;
+    scene.add(ground);
+
+    var mkLabel = function(text){ var d = document.createElement("div"); d.textContent = text; d.style.cssText = "position:absolute;left:0;top:0;pointer-events:none;white-space:nowrap;font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#BFE3EE;text-transform:uppercase;text-shadow:0 1px 3px rgba(0,0,0,0.9);padding-left:10px;opacity:0;will-change:transform"; var dot = document.createElement("span"); dot.style.cssText = "position:absolute;left:0;top:50%;width:5px;height:5px;margin-top:-2.5px;border-radius:50%;background:#C57B3D;box-shadow:0 0 6px rgba(197,123,61,0.9)"; d.appendChild(dot); mount.appendChild(d); return d; };
+    var condLabels = [
+      { p: new THREE.Vector3(0.18, 1.02, -0.28), t: "Compressor", ox: 14, oy: 6 },
+      { p: new THREE.Vector3(0, 2.2, 0), t: "Fan motor", ox: 10, oy: -14 },
+      { p: new THREE.Vector3(0.62, 1.8, 0.72), t: "Contactor", ox: 12, oy: -10 },
+      { p: new THREE.Vector3(0.62, 1.42, 0.44), t: "Capacitor", ox: 12, oy: 14 },
+      { p: new THREE.Vector3(-0.82, 1.78, 0.1), t: "Communicating board", ox: -10, oy: -14 },
+      { p: new THREE.Vector3(0.64, 2.02, 0.5), t: "High voltage 240V", ox: 14, oy: -26 },
+      { p: new THREE.Vector3(-0.1, 1.6, 0.45), t: "Low voltage", ox: -6, oy: 16 },
+      { p: new THREE.Vector3(1.6, 0.42, 0.55), t: "Copper lineset", ox: 12, oy: 10 }
+    ].map(function(l){ l.el = mkLabel(l.t); l.grp = cond; return l; });
+    var ahuLabels = [
+      { p: new THREE.Vector3(0, 2.38, 0.3), t: "Heat kit 10KW", ox: -8, oy: -14 },
+      { p: new THREE.Vector3(0.6, 2.3, 0.42), t: "60A breaker", ox: 14, oy: 0 },
+      { p: new THREE.Vector3(0, 1.62, 0.4), t: "Fan blower", ox: -10, oy: 14 },
+      { p: new THREE.Vector3(0, 1.62, 0.44), t: "Capacitor", ox: 12, oy: 26 },
+      { p: new THREE.Vector3(0, 1.05, 0.3), t: "A-frame coil", ox: 12, oy: 8 },
+      { p: new THREE.Vector3(0, 0.42, 0.5), t: "Return", ox: 10, oy: 14 },
+      { p: new THREE.Vector3(0.3, 2.25, 0.34), t: "High voltage", ox: 16, oy: 16 },
+      { p: new THREE.Vector3(0.2, 1.9, 0.36), t: "Low voltage", ox: 16, oy: -14 },
+      { p: new THREE.Vector3(0, 3.7, 0), t: "Supply plenum", ox: 10, oy: -10 },
+      { p: new THREE.Vector3(0.4, 2.6, -0.25), t: "Copper riser", ox: 14, oy: -22 },
+      { p: new THREE.Vector3(-1.28, 1.62, 0), t: "Nest thermostat", ox: -10, oy: -14 },
+      { p: new THREE.Vector3(0.35, 0.9, 1.2), t: "Copper lineset", ox: 12, oy: -12 },
+      { p: new THREE.Vector3(-0.35, 0.4, 1.25), t: "Primary drain — PVC", ox: 12, oy: 12 }
+    ].map(function(l){ l.el = mkLabel(l.t); l.grp = ahu; return l; });
+    var allLabels = condLabels.concat(ahuLabels);
+    var labelV = new THREE.Vector3();
+    var labelW = new THREE.Vector3();
+    var camDir = new THREE.Vector3();
+    var anchorDir = new THREE.Vector3();
+    var unitCenter = new THREE.Vector3();
+    var openDir = new THREE.Vector3();
+
+    var updateLabels = function(condMixIn, ahuMixIn){
+      var w = mount.clientWidth, h = mount.clientHeight;
+      unit.getWorldPosition(unitCenter);
+      unitCenter.y = 1.3;
+      camDir.copy(camera.position).sub(unitCenter).normalize();
+      openDir.set(1, 0, 0).applyQuaternion(unit.quaternion);
+      var openFacing = openDir.dot(camDir);
+      var openVis = Math.min(1, Math.max(0, (openFacing - 0.15) / 0.3));
+      for (var li = 0; li < allLabels.length; li++) {
+        var l = allLabels[li];
+        var grpMix = l.grp === cond ? condMixIn : ahuMixIn;
+        var vis = Math.min(1, Math.max(0, (grpMix - 0.55) / 0.45)) * openVis;
+        labelW.copy(l.p).applyMatrix4(l.grp.matrixWorld);
+        anchorDir.copy(labelW).sub(unitCenter);
+        anchorDir.y *= 0.35;
+        var facing = anchorDir.lengthSq() < 0.04 ? 1 : anchorDir.normalize().dot(camDir);
+        labelV.copy(labelW).project(camera);
+        if (labelV.z > 1 || vis <= 0.01 || facing < 0.1) { l.el.style.opacity = "0"; continue; }
+        var x = (labelV.x * 0.5 + 0.5) * w + l.ox;
+        var y = (-labelV.y * 0.5 + 0.5) * h + l.oy;
+        l.el.style.opacity = String(vis * Math.min(1, (facing - 0.1) / 0.25));
+        l.el.style.transform = "translate(" + x + "px," + y + "px)";
+      }
+    };
+
+    var targetY = -0.75, currentY = -0.75;
+    var dragging = false, lastX = 0, autoSpin = true;
+    var onDown = function(e){ dragging = true; autoSpin = false; lastX = e.touches ? e.touches[0].clientX : e.clientX; };
+    var onMove = function(e){ if (!dragging) return; var x = e.touches ? e.touches[0].clientX : e.clientX; targetY += (x - lastX) * 0.008; lastX = x; };
+    var onUp = function(){ dragging = false; setTimeout(function(){ autoSpin = true; }, 2500); };
+    var el = renderer.domElement;
+    el.addEventListener("pointerdown", onDown);
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    el.addEventListener("touchstart", onDown, { passive: true });
+    el.addEventListener("touchmove", onMove, { passive: true });
+    el.addEventListener("touchend", onUp);
+
+    var resize = function(){ var w = mount.clientWidth, h = mount.clientHeight; if (!w || !h) return; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); };
+    resize();
+    window.addEventListener("resize", resize);
+
+    var clock = new THREE.Clock();
+    var fwdV = new THREE.Vector3(), rightV = new THREE.Vector3(), wRightV = new THREE.Vector3(), qInv = new THREE.Quaternion();
+    var stageCycle = ["ahu", "cond", "ahu", "both"];
+    var prevY = currentY, spinSince = 0, stageIdx = 0, stage = "cond";
+    var condMix = 1, ahuMix = 0, sep = 0;
+    var animate = function(){
+      reqId = requestAnimationFrame(animate);
+      var t = clock.getElapsedTime();
+      if (autoSpin && !reduceMotion) targetY += 0.0022;
+      currentY += (targetY - currentY) * 0.06;
+      unit.rotation.y = currentY;
+      spinSince += Math.abs(currentY - prevY);
+      prevY = currentY;
+      if (spinSince >= Math.PI * 2) { stage = stageCycle[stageIdx % 4]; stageIdx++; spinSince = 0; }
+      var condT = stage === "cond" || stage === "both" ? 1 : 0;
+      var ahuT = stage === "ahu" || stage === "both" ? 1 : 0;
+      var sepT = stage === "both" ? 1.7 : 0;
+      condMix += (condT - condMix) * 0.05;
+      ahuMix += (ahuT - ahuMix) * 0.05;
+      sep += (sepT - sep) * 0.05;
+      var shrink = 1 - sep * 0.13;
+      cond.scale.setScalar(Math.max(0.0001, condMix * shrink));
+      ahu.scale.setScalar(Math.max(0.0001, ahuMix * shrink));
+      var theoreticalCamPos = new THREE.Vector3(4.6, 2.7, 5.6 + sep * 2.6);
+      var centerTarget = new THREE.Vector3(0, 1.15, 0);
+      fwdV.copy(centerTarget).sub(theoreticalCamPos).normalize();
+      rightV.set(-fwdV.z, 0, fwdV.x).normalize();
+      wRightV.copy(rightV);
+      qInv.copy(unit.quaternion).invert();
+      rightV.applyQuaternion(qInv);
+      cond.position.copy(rightV).multiplyScalar(sep * 0.75);
+      if (!reduceMotion) cond.position.y += Math.sin(t * 2) * 0.08;
+      ahu.position.set(0, 0, 0);
+      camera.position.z = 5.6 + sep * 2.6;
+      cond.visible = condMix > 0.005;
+      ahu.visible = ahuMix > 0.005;
+      unit.updateMatrixWorld(true);
+      updateLabels(condMix, ahuMix);
+      if (!reduceMotion) fan.rotation.y = t * 9;
+      var pos = pGeo.attributes.position.array;
+      for (var k = 0; k < P; k++) { pos[k * 3 + 1] += reduceMotion ? 0 : speeds[k]; if (pos[k * 3 + 1] > 5.2) pos[k * 3 + 1] = 2.6; }
+      pGeo.attributes.position.needsUpdate = true;
+      camera.position.y = 2.7 + Math.sin(t * 0.4) * 0.06;
+      camera.lookAt(-wRightV.x * sep * 0.85, 1.15, -wRightV.z * sep * 0.85);
+      renderer.render(scene, camera);
+    };
+    animate();
+    mount.style.opacity = "1";
+
+    return () => {
+      cancelAnimationFrame(reqId);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("resize", resize);
+      el.removeEventListener("pointerdown", onDown);
+      el.removeEventListener("touchstart", onDown);
+      el.removeEventListener("touchmove", onMove);
+      el.removeEventListener("touchend", onUp);
+      if (mount) mount.innerHTML = '';
+      renderer.dispose();
+    };
+  }, []);
+
+  return <div ref={mountRef} className="absolute inset-0 opacity-0 transition-opacity duration-1000 z-0" style={{ touchAction: 'none' }} />;
+}
+package.json
+{
+  "name": "vite_react_shadcn_ts",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:dev": "vite build --mode development",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.10.0",
+    "@radix-ui/react-accordion": "^1.2.11",
+    "@radix-ui/react-alert-dialog": "^1.1.14",
+    "@radix-ui/react-aspect-ratio": "^1.1.7",
+    "@radix-ui/react-avatar": "^1.1.10",
+    "@radix-ui/react-checkbox": "^1.3.2",
+    "@radix-ui/react-collapsible": "^1.1.11",
+    "@radix-ui/react-context-menu": "^2.2.15",
+    "@radix-ui/react-dialog": "^1.1.14",
+    "@radix-ui/react-dropdown-menu": "^2.1.15",
+    "@radix-ui/react-hover-card": "^1.1.14",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-menubar": "^1.1.15",
+    "@radix-ui/react-navigation-menu": "^1.2.13",
+    "@radix-ui/react-popover": "^1.1.14",
+    "@radix-ui/react-progress": "^1.1.7",
+    "@radix-ui/react-radio-group": "^1.3.7",
+    "@radix-ui/react-scroll-area": "^1.2.9",
+    "@radix-ui/react-select": "^2.2.5",
+    "@radix-ui/react-separator": "^1.1.7",
+    "@radix-ui/react-slider": "^1.3.5",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-switch": "^1.2.5",
+    "@radix-ui/react-tabs": "^1.1.12",
+    "@radix-ui/react-toast": "^1.2.14",
+    "@radix-ui/react-toggle": "^1.1.9",
+    "@radix-ui/react-toggle-group": "^1.1.10",
+    "@radix-ui/react-tooltip": "^1.2.7",
+    "@tanstack/react-query": "^5.83.0",
+    "@types/three": "^0.185.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "date-fns": "^3.6.0",
+    "embla-carousel-react": "^8.6.0",
+    "input-otp": "^1.4.2",
+    "lucide-react": "^0.462.0",
+    "next-themes": "^0.3.0",
+    "react": "^18.3.1",
+    "react-day-picker": "^8.10.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.61.1",
+    "react-resizable-panels": "^2.1.9",
+    "react-router-dom": "^6.30.1",
+    "recharts": "^2.15.4",
+    "sonner": "^1.7.4",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7",
+    "three": "0.149.0",
+    "vaul": "^0.9.9",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.32.0",
+    "@leadconnector/vibe-tagger": "^0.3.1",
+    "@testing-library/jest-dom": "^6.6.0",
+    "@testing-library/react": "^16.0.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/node": "^22.16.5",
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react-swc": "^3.11.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.32.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^15.15.0",
+    "jsdom": "^20.0.3",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.38.0",
+    "vite": "^5.4.19",
+    "vitest": "^3.2.4"
+  }
+}
+That's the complete custom source code for your entire project. The only files omitted are the standard shadcn UI components in src/components/ui/ (except button.tsx which has your custom 3D effect). Those can be reinstalled with npx shadcn@latest add button card dialog input label textarea radio-group checkbox select scroll-area badge if needed.
